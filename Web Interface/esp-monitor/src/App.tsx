@@ -9,13 +9,14 @@ import { database, app } from "./firebase";
 function App() {
   const [espStatus, setEspStatus] = useState(false);
 
-  const starCountRef = ref(database, '/Device-Statistics/espStatus');
+  const espStatusRef = ref(database, '/Device-Statistics/espStatus');
   useEffect(() => {
-    onValue(starCountRef, (snapshot) => {
+    onValue(espStatusRef, (snapshot) => {
       const data = snapshot.val();
       setEspStatus(data);
+      console.log(espStatus)
     });
-  })
+  }, [])
 
   return (
     <div className="App">
