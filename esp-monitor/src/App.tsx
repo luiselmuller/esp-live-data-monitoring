@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
-import { ref, onValue, getDatabase } from 'firebase/database'
-import { database, app } from './firebase'
+import { getDatabase, ref, onValue, get, child} from "firebase/database";
+import { database, app } from "./firebase";
+
 
 function App() {
-  const [espStatus, setEspStatus] = useState(false)
-  
-  const espStatusRef = ref(database, 'Device-Statistics');
-  onValue(espStatusRef, (snapshot) => {
-    const data = snapshot.val();
-    setEspStatus(data);
-    console.log(data);
+  const [espStatus, setEspStatus] = useState(false);
+
+  const starCountRef = ref(database, '/Device-Statistics/espStatus');
+  useEffect(() => {
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setEspStatus(data);
+    });
   })
 
   return (
