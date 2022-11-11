@@ -10,7 +10,7 @@ import { createTheme, Snackbar, ThemeProvider } from '@mui/material'
 const Overview = lazy(() => import('./pages/Overview'))
 const DeviceStatistics = lazy(() => import('./pages/DeviceStatistics'))
 const Sidebar = lazy(() => import('./components/global/Sidebar'))
-const MobileSidebar = lazy(() => import('./components/global/MobileSidebar'))
+const MobileNavigation = lazy(() => import('./components/global/MobileNavigation'))
 
 // Theme
 const darkTheme = createTheme({
@@ -22,11 +22,11 @@ const darkTheme = createTheme({
 // TODO: Make sidebar links be highlighted when on that page
 
 function App() {
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [screenSize, setScreenSize] = useState(1920);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarDisabled, setSidebarDisabled] = useState(false);
-  const [mobileSideDisabled, setMobileSideDisabled] = useState(true);
+  const [mobileNavDisabled, setMobileNavDisabled] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -40,12 +40,12 @@ function App() {
     if(screenSize <= 700){
       setSidebarOpen(false);
       setSidebarDisabled(true);
-      setMobileSideDisabled(false);
+      setMobileNavDisabled(false);
     }
     else{
       setSidebarDisabled(false);
-      setMobileSideDisabled(true);
-      setMobileSidebarOpen(false);
+      setMobileNavDisabled(true);
+      setMobileNavOpen(false);
     }
     
   }, [screenSize, setSidebarOpen])
@@ -69,15 +69,15 @@ function App() {
               )}
 
               {/* Mobile Sidebar */}
-              {mobileSidebarOpen ? (
+              {mobileNavOpen ? (
               <div className="h-screen z-[1000] fixed bg-main-dark-bg transition-all duration-150 ease-in-out">
-                <MobileSidebar 
-                  handleMobileSideOpen={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                <MobileNavigation 
+                  handleMobileSideOpen={() => setMobileNavOpen(!mobileNavOpen)}
                 />
               </div>
               ) : (
               <div className="h-0 hidden bg-secondary-dark-bg">
-                <MobileSidebar />
+                <MobileNavigation handleMobileSideOpen={() => setMobileNavOpen(!mobileNavOpen)} />
               </div>
               )}
 
@@ -86,9 +86,9 @@ function App() {
                   {/* Navbar */}
                   <Navbar 
                     customFuncOne={() => setSidebarOpen(!sidebarOpen)}
-                    customFuncTwo={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                    customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
                     disabledSide={sidebarDisabled}
-                    mobileSide={mobileSideDisabled}
+                    mobileSide={mobileNavDisabled}
                   />
                 </div>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 // Icon imports
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,18 +12,17 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 
-type props = {
+type navProps = {
   customFuncOne: any,
   disabledSide: any,
   mobileSide: any,
   customFuncTwo: any
 }
 
-function Navbar({customFuncOne={},customFuncTwo={} , disabledSide={}, mobileSide={}}) {
+const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}, mobileSide={}}) => {
   const notificationNumber = 0;
   const theme = 0;
   
-  // FIXME: Type '{}' is not assignable to type 
   return (
     <div className={`flex justify-evenly p-3 relative text-indigo-300 mx-3`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}

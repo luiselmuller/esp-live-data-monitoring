@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-type props = {
+type cardProps = {
     title?: string,
     width?: string,
     height?: string,
@@ -12,7 +12,7 @@ type props = {
 
 }
 
-const SimpleCard:FC<props> = ({title=" ", width="w-72", height="h-28", icon=" ",
+const SimpleCard:FC<cardProps> = ({title=" ", width="w-72", height="h-28", icon=" ",
  bg="bg-secondary-dark-bg", iconColor="text-white", iconBg="bg-main-dark-bg", data=0}) => {
   return (
     <div className={`${width} ${height} ${bg} rounded-3xl flex items-center`}>
