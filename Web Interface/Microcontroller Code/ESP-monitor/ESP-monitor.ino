@@ -2,7 +2,7 @@
 
 #include <WiFi.h>
 #include <WiFiClient.h>
-#include <FirebaseESP32.h>
+#include <Firebase_ESP_Client.h>
 
 // Provide the token generation process info.
 #include <addons/TokenHelper.h>
@@ -11,17 +11,16 @@
 #include <addons/RTDBHelper.h>
 
 // Firebase credentials
-#define FIREBASE_HOST "esp32-monitor-2244b-default-rtdb.firebaseio.com"
-#define FIREBASE_AUTH "G4ZrPCRachbU8HjthGEwSikUHDs15zkwsNHFfS05"
+#define FIREBASE_HOST //""
+#define FIREBASE_AUTH //need to hide""
 
 // Wifi credentials
-#define ssid "LIB-9709159"
-#define pass "p6gwFntFyckm"
+#define ssid ""
+#define pass ""
 
 // Firebase object
 FirebaseData firebaseData;
 FirebaseJson json;
-bool isOnline;
 
 // Uptime variable
 unsigned long uptime = 0;
@@ -42,7 +41,7 @@ void setup() {
   Serial.println(WiFi.localIP());
   Serial.println();
 
-  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+
   Firebase.reconnectWiFi(true);
 
   //Database read timeout 1 minute (max 15 mins)
@@ -55,13 +54,11 @@ void setup() {
 
   Serial.println("---------------------------------------------------");
   Serial.println("Connected...");
-  json.set("/isOnline", true);
-  Firebase.RTDB.setJSON(&firebaseData, "/isOnline", &json);
 }
 
 void loop() {  
   // get data from firebase
-  Firebase.getBool(firebaseData, "/isOnline/isOnline");
+  Firebase.getBool(firebaseData, "/Device-Statistics/espStatus/espStatus");
   isOnline = firebaseData.to<bool>(); // convert to the correct type
 
   // Send data in non blocking way every certain amount of time

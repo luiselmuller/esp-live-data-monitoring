@@ -1,45 +1,107 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { lazy, useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 
-import { getDatabase, ref, onValue, get, child} from "firebase/database";
-import { database, app } from "./firebase";
+import Navbar from './components/global/Navbar'
+import { createTheme, Snackbar, ThemeProvider } from '@mui/material'
+
+// Lazy load pages
+const Overview = lazy(() => import('./pages/Overview'))
+const DeviceStatistics = lazy(() => import('./pages/DeviceStatistics'))
+const Sidebar = lazy(() => import('./components/global/Sidebar'))
+const MobileSidebar = lazy(() => import('./components/global/MobileSidebar'))
+
+// Theme
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 
 function App() {
-  const [espStatus, setEspStatus] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [screenSize, setScreenSize] = useState(1920);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarDisabled, setSidebarDisabled] = useState(false);
+  const [mobileSideDisabled, setMobileSideDisabled] = useState(true);
 
-  const espStatusRef = ref(database, '/Device-Statistics/espStatus');
+  let disableSidebar = false;
+
   useEffect(() => {
-    onValue(espStatusRef, (snapshot) => {
-      const data = snapshot.val();
-      setEspStatus(data);
-      console.log(espStatus)
-    });
-  }, [])
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    
+    return () => window.removeEventListener('resize', handleResize);
+  })
+  useEffect(() =>{
+    if(screenSize <= 700){
+      setSidebarOpen(false);
+      setSidebarDisabled(true);
+      setMobileSideDisabled(false);
+    }
+    else{
+      setSidebarDisabled(false);
+      setMobileSideDisabled(true);
+      setMobileSidebarOpen(false);
+    }
+    
+  }, [screenSize, setSidebarOpen])
 
   return (
-    <div className="App">
-      <div className="flex justify-center scale-150 mb-10">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <BrowserRouter>
+          <div className="flex relative bg-main-dark-bg text-slate-200">
+            {/* Sidebar  */}
+            {sidebarOpen ? (
+            <div className="w-72 sidebar bg-secondary-dark-bg transition-all duration-150 ease-in-out">
+              <Sidebar />
+            </div>
+            ) : (
+            <div className="w-0 hidden fixed bg-secondary-dark-bg">
+              <Sidebar />
+            </div>
+            )}
+
+            {/* Mobile Sidebar */}
+            {mobileSidebarOpen ? (
+            <div className="h-screen z-[1000] fixed bg-main-dark-bg transition-all duration-150 ease-in-out">
+              <MobileSidebar />
+            </div>
+            ) : (
+            <div className="h-0 hidden bg-secondary-dark-bg">
+              <MobileSidebar />
+            </div>
+            )}
+
+            <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
+              <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+                {/* Navbar */}
+                <Navbar 
+                  customFuncOne={() => setSidebarOpen(!sidebarOpen)}
+                  customFuncTwo={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                  disabledSide={sidebarDisabled}
+                  mobileSide={mobileSideDisabled}
+                />
+              </div>
+
+              {/* Routes */}
+              <div>
+                <Routes>
+                  <Route path="/" element={<Overview />} />
+                  <Route path="/overview" element={<Overview />} />
+                  <Route path="/device-statistics" element={<DeviceStatistics />} />
+                </Routes>
+              </div>
+            </div>
+          </div>
+          
+        </BrowserRouter>
       </div>
-      <h1>ESP32 Status</h1>
-      <div className="card flex items-center justify-center gap-5 text-3xl font-bold tracking-wide">
-        <div className={`rounded-full h-5 w-5 ${espStatus ? "bg-green-500" : "bg-red-500"}`}></div>   
-        {!espStatus ? (<h2>Offline</h2>) : (<h2>Online</h2>)}
-      </div>
-      <p className="mb-10">
-        Firebase and ESP32 communication example.
-      </p>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    </ThemeProvider>
   )
 }
 
