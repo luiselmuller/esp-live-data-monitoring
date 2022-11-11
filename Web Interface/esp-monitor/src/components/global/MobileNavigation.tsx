@@ -17,11 +17,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileSideOpen={}}) => {
         {/* Items */}
         <div className="flex flex-col gap-5 mt-8">
           {/* TODO: Make this into a loop that generates the links */}
-          
-          {/* Exit button */}
-          <button type="button" onClick={handleMobileSideOpen} className="flex justify-start mx-6">
-            <CancelOutlinedIcon fontSize="large"/>
-          </button>
+        
           {/* Temporary */}
           <NavLink to="/" onClick={handleMobileSideOpen}
           className="flex items-center mx-4 text-2xl gap-1  px-2 py-4 rounded-lg">

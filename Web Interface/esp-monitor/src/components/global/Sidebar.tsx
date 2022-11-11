@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2">
         {/* Header */}
-        <p className="text-xl flex justify-center py-4 font-semibold mb-4 border-b-1 ">Micro Dashboard</p>
+        <p className="text-xl flex justify-center py-4 font-semibold mb-4 border-b-1">Micro Dashboard</p>
 
         {/* TODO: Make this into a loop that generates the links */}
         {/* Items */}

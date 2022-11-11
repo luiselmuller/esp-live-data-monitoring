@@ -11,15 +11,16 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
+import CancelOutlined from '@mui/icons-material/CancelOutlined';
 
 type navProps = {
   customFuncOne: any,
   disabledSide: any,
-  mobileSide: any,
+  mobileNav: any,
   customFuncTwo: any
 }
 
-const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}, mobileSide={}}) => {
+const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}, mobileNav={}}) => {
   let notificationNumber = 0;
   let theme = 0;
   
@@ -27,7 +28,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
     <div className={`flex justify-evenly p-3 relative mx-3`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
-          <MenuIcon fontSize="large" />
+          {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
 
         <div className="w-full"></div>
@@ -40,31 +41,36 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
             </button>
           </Tooltip>
 
-          <Tooltip title="Notifications"
+          {!mobileNav && 
+            <Tooltip title="Notifications"
             className="hover:scale-110 transition-all duration-150 ease-in-out">
-            <button type="button" onClick={() => {}}>
-              <Badge badgeContent={notificationNumber} color="info" overlap="circular">
-                {notificationNumber > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
-              
-              </Badge>
-            </button>
-          </Tooltip>
+              <button type="button" onClick={() => {}}>
+                <Badge badgeContent={notificationNumber} color="info" overlap="circular">
+                  {notificationNumber > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
+                </Badge>
+              </button>
+            </Tooltip>
+          }
           
           {/* Settings */}
-          <Tooltip title="Settings"
-            className="hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
-            <button type="button" onClick={() => {}}>
-              <SettingsIcon fontSize="large" />
-            </button>
-          </Tooltip>
+          {!mobileNav && 
+            <Tooltip title="Settings"
+              className="hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
+              <button type="button" onClick={() => {}}>
+                <SettingsIcon fontSize="large" />
+              </button>
+            </Tooltip>
+          }
 
           {/* Profile */}
-          <Tooltip title="Profile"
-            className="hover:scale-110 transition-all duration-150 ease-in-out">
-            <button type="button" onClick={() => {}}>
-              <AccountCircleIcon fontSize="large" />
-            </button>
-          </Tooltip>
+          {!mobileNav && 
+            <Tooltip title="Profile"
+              className="hover:scale-110 transition-all duration-150 ease-in-out">
+              <button type="button" onClick={() => {}}>
+                <AccountCircleIcon fontSize="large" />
+              </button>
+            </Tooltip>
+          }
         </div>
       <div>
       </div>

@@ -57,13 +57,15 @@ function App() {
           <Router>
             <div className="flex relative bg-main-dark-bg text-slate-200">
               {/* Sidebar  */}
-              <div className={`${sidebarOpen ? "w-72 " : "w-0 overflow-hidden"} bg-secondary-dark-bg transition-all duration-150 ease-out`}>
+              <div className={`${sidebarOpen ? "w-72 " : "w-0 overflow-hidden"} 
+              bg-secondary-dark-bg transition-all duration-150 ease-out`}>
                 <Sidebar />
               </div>
               <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
                 <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                   {/* Mobile Sidebar */}
-                  <div className={`${mobileNavOpen ? "h-screen" : "h-0  overflow-hidden w-0"} bg-main-dark-bg transition-all duration-150 ease-in-out`}>
+                  <div className={`${mobileNavOpen ? "h-screen" : "h-0 overflow-hidden"}
+                  bg-main-dark-bg transition-all duration-150 ease-linear fixed`}>
                       <MobileNavigation 
                         handleMobileSideOpen={() => setMobileNavOpen(!mobileNavOpen)}
                       />
@@ -73,7 +75,7 @@ function App() {
                     customFuncOne={() => setSidebarOpen(!sidebarOpen)}
                     customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
                     disabledSide={sidebarDisabled}
-                    mobileSide={mobileNavDisabled}
+                    mobileNav={mobileNavOpen}
                   />
                 </div>
 
