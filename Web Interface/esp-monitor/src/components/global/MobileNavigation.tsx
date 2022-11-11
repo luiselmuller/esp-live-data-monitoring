@@ -19,7 +19,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileSideOpen={}}) => {
           {/* TODO: Make this into a loop that generates the links */}
           
           {/* Exit button */}
-          <button type="button" onClick={handleMobileSideOpen} className="flex justify-end mx-6">
+          <button type="button" onClick={handleMobileSideOpen} className="flex justify-start mx-6">
             <CancelOutlinedIcon fontSize="large"/>
           </button>
           {/* Temporary */}

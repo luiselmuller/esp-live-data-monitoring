@@ -35,7 +35,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
         <div className="flex gap-4">
           <Tooltip title="Theme">
             <button type="button" onClick={() => {}}
-              className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
+              className={`hover:scale-110 transition-all duration-150 ease-in-out outline-none`}>
               {theme ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
