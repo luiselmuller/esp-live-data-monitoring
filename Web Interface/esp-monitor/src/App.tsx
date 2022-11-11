@@ -19,6 +19,7 @@ const darkTheme = createTheme({
   },
 });
 
+// TODO: Make sidebar links be highlighted when on that page
 
 function App() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -71,7 +72,7 @@ function App() {
               {mobileSidebarOpen ? (
               <div className="h-screen z-[1000] fixed bg-main-dark-bg transition-all duration-150 ease-in-out">
                 <MobileSidebar 
-                  customFuncTwo={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                  handleMobileSideOpen={() => setMobileSidebarOpen(!mobileSidebarOpen)}
                 />
               </div>
               ) : (

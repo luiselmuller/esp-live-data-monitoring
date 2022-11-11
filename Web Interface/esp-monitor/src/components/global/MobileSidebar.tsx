@@ -17,6 +17,7 @@ const MobileSidebar = ({handleMobileSideOpen={}}) => {
         <div className="flex flex-col gap-2">
           <p className="text-xl p-2 mb-5">ESP32 Dashboard</p>
 
+          // FIXME: Type '{}' is not assignable to type 
           {/* Temporary */}
           <NavLink to="/" onClick={handleMobileSideOpen}
           className="flex items-center gap-1 hover:bg-main-dark-bg p-2 rounded-lg">
