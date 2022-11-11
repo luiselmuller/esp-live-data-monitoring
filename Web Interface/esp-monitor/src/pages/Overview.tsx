@@ -15,7 +15,7 @@ const Overview = () => {
   return (
     <div className="mt-16">
       {/* Cards */}
-      <div className="flex flex-wrap justify-center gap-4 px-4">
+      <div className="flex flex-wrap justify-center gap-4 sm:px-4">
         {/* TODO: Make the cards generate by themselves according to the sensor data
             fields received from firebase. Also give the icons an id somehow so they correspond to 
             a certain data reading. */}
