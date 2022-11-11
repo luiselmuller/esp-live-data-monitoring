@@ -1,11 +1,12 @@
-import { lazy, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 
+import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/global/Navbar'
 import { createTheme, Snackbar, ThemeProvider } from '@mui/material'
 
-// Lazy load pages
+// Lazy load components
 const Overview = lazy(() => import('./pages/Overview'))
 const DeviceStatistics = lazy(() => import('./pages/DeviceStatistics'))
 const Sidebar = lazy(() => import('./components/global/Sidebar'))
@@ -25,8 +26,6 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarDisabled, setSidebarDisabled] = useState(false);
   const [mobileSideDisabled, setMobileSideDisabled] = useState(true);
-
-  let disableSidebar = false;
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -51,57 +50,62 @@ function App() {
   }, [screenSize, setSidebarOpen])
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <div className="App">
-        <BrowserRouter>
-          <div className="flex relative bg-main-dark-bg text-slate-200">
-            {/* Sidebar  */}
-            {sidebarOpen ? (
-            <div className="w-72 sidebar bg-secondary-dark-bg transition-all duration-150 ease-in-out">
-              <Sidebar />
-            </div>
-            ) : (
-            <div className="w-0 hidden fixed bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-            )}
+    <Suspense fallback={<LoadingScreen />}>
+      <ThemeProvider theme={darkTheme}>
+        <div className="App">
+          <Router>
+            <div className="flex relative bg-main-dark-bg text-slate-200">
+              {/* TODO: NEED TO CHANGE THIS TO RENDER JUST ONCE */}
+              {/* Sidebar  */}
+              {sidebarOpen ? (
+              <div className="w-72 sidebar bg-secondary-dark-bg transition-all duration-150 ease-in-out">
+                <Sidebar />
+              </div>
+              ) : (
+              <div className="w-0 hidden fixed bg-secondary-dark-bg">
+                <Sidebar />
+              </div>
+              )}
 
-            {/* Mobile Sidebar */}
-            {mobileSidebarOpen ? (
-            <div className="h-screen z-[1000] fixed bg-main-dark-bg transition-all duration-150 ease-in-out">
-              <MobileSidebar />
-            </div>
-            ) : (
-            <div className="h-0 hidden bg-secondary-dark-bg">
-              <MobileSidebar />
-            </div>
-            )}
-
-            <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-              <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-                {/* Navbar */}
-                <Navbar 
-                  customFuncOne={() => setSidebarOpen(!sidebarOpen)}
+              {/* Mobile Sidebar */}
+              {mobileSidebarOpen ? (
+              <div className="h-screen z-[1000] fixed bg-main-dark-bg transition-all duration-150 ease-in-out">
+                <MobileSidebar 
                   customFuncTwo={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-                  disabledSide={sidebarDisabled}
-                  mobileSide={mobileSideDisabled}
                 />
               </div>
+              ) : (
+              <div className="h-0 hidden bg-secondary-dark-bg">
+                <MobileSidebar />
+              </div>
+              )}
 
-              {/* Routes */}
-              <div>
-                <Routes>
-                  <Route path="/" element={<Overview />} />
-                  <Route path="/overview" element={<Overview />} />
-                  <Route path="/device-statistics" element={<DeviceStatistics />} />
-                </Routes>
+              <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
+                <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+                  {/* Navbar */}
+                  <Navbar 
+                    customFuncOne={() => setSidebarOpen(!sidebarOpen)}
+                    customFuncTwo={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                    disabledSide={sidebarDisabled}
+                    mobileSide={mobileSideDisabled}
+                  />
+                </div>
+
+                {/* Routes */}
+                <div>
+                  <Routes>
+                    <Route path="/" element={<Overview />} />
+                    <Route path="/overview" element={<Overview />} />
+                    <Route path="/device-statistics" element={<DeviceStatistics />} />
+                  </Routes>
+                </div>
               </div>
             </div>
-          </div>
-          
-        </BrowserRouter>
-      </div>
-    </ThemeProvider>
+            
+          </Router>
+        </div>
+      </ThemeProvider>
+    </Suspense>
   )
 }
 
