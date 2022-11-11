@@ -37,7 +37,7 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   })
   useEffect(() =>{
-    if(screenSize <= 700){
+    if(screenSize <= 750){
       setSidebarOpen(false);
       setSidebarDisabled(true);
       setMobileNavDisabled(false);

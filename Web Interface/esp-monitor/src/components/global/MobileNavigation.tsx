@@ -11,25 +11,24 @@ type mobileNavProps = {
 const MobileNavigation:FC<mobileNavProps> = ({handleMobileSideOpen={}}) => {
 
   return (
-    <div className="ml-3 w-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
+    <div className="w-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
       
         {/* Items */}
-        <div className="flex flex-col gap-2">
-          <p className="text-xl p-2 mb-5">ESP32 Dashboard</p>
+        <div className="flex flex-col gap-5 mt-20">
 
           {/* Temporary */}
           <NavLink to="/" onClick={handleMobileSideOpen}
-          className="flex items-center gap-1 hover:bg-main-dark-bg p-2 rounded-lg">
-            <CalendarViewMonthIcon />
-            <p>Overview</p>
+          className="flex items-center ml-4 text-2xl gap-1 hover:bg-main-dark-bg p-2 rounded-lg">
+            <CalendarViewMonthIcon fontSize="large"/>
+            Overview
             
           </NavLink>
-
+          <div className="mx-4 rounded-full opacity-25 h-1 bg-secondary-dark-bg"></div>
           {/* Temporary */}
           <NavLink to="/device-statistics" onClick={handleMobileSideOpen}
-          className="flex items-center gap-1 hover:bg-main-dark-bg p-2 rounded-lg">
-            <MonitorHeartIcon />
-            <p>Device Statistics</p>
+          className="flex items-center ml-4 text-2xl gap-1 hover:bg-main-dark-bg p-2 rounded-lg">
+            <MonitorHeartIcon fontSize="large"/>
+            Device Statistics
             
           </NavLink>
           

@@ -14,13 +14,17 @@ const SimpleCard = lazy(() => import('../components/SimpleCard'));
 const Overview = () => {
   return (
     <div className="mt-16">
+      {/* Cards */}
       <div className="flex flex-wrap justify-center gap-4 px-4">
+        {/* TODO: Make the cards generate by themselves according to the sensor data
+            fields received from firebase. Also give the icons an id somehow so they correspond to 
+            a certain data reading. */}
         {/* ESP Status */}
         <SimpleCard 
           title="Device Status"
           icon={<WifiIcon fontSize="large"/>}
           data={<p className="flex items-center gap-2">
-            <div className={`bg-green-400 h-2 w-2 rounded-full relative`}></div>
+            <span className={`bg-green-400 h-2 w-2 rounded-full relative`}></span>
             Online 
           </p>}
         />
@@ -54,6 +58,10 @@ const Overview = () => {
           data={<p>400 <span>L/M</span></p>}
           icon={<WaterIcon fontSize="large"/>}
         />
+      </div>
+      {/* Widgets */}
+      <div className="flex flex-wrap justify-center gap-4 px-4 bg-white">
+
       </div>
     </div>
   )

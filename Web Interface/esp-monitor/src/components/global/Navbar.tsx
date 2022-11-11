@@ -24,7 +24,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
   const theme = 0;
   
   return (
-    <div className={`flex justify-evenly p-3 relative text-indigo-300 mx-3`}>
+    <div className={`flex justify-evenly p-3 relative mx-3`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
           <MenuIcon />
