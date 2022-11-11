@@ -15,7 +15,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileSideOpen={}}) => {
     <div className="w-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
       
         {/* Items */}
-        <div className="flex flex-col gap-5 mt-8">
+        <div className="flex flex-col gap-5 mt-16">
           {/* TODO: Make this into a loop that generates the links */}
         
           {/* Temporary */}
