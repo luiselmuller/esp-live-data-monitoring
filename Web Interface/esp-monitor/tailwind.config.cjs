@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+
+      transitionProperty: {
+        'width': 'width',
+        'height': 'height'
+      },
       backgroundColor: {
         'main-bg': '#FAFBFB',
         'main-dark-bg': '#20232A',

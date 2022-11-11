@@ -20,14 +20,14 @@ type navProps = {
 }
 
 const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}, mobileSide={}}) => {
-  const notificationNumber = 0;
-  const theme = 0;
+  let notificationNumber = 0;
+  let theme = 0;
   
   return (
     <div className={`flex justify-evenly p-3 relative mx-3`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
-          <MenuIcon />
+          <MenuIcon fontSize="large" />
         </button>
 
         <div className="w-full"></div>
@@ -36,7 +36,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
           <Tooltip title="Theme">
             <button type="button" onClick={() => {}}
               className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
-              {theme ? <LightModeIcon /> : <DarkModeIcon />}
+              {theme ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
 
@@ -44,7 +44,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
             className="hover:scale-110 transition-all duration-150 ease-in-out">
             <button type="button" onClick={() => {}}>
               <Badge badgeContent={notificationNumber} color="info" overlap="circular">
-                {notificationNumber > 0 ? <NotificationImportantIcon /> : <NotificationsNoneIcon />}
+                {notificationNumber > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
               
               </Badge>
             </button>
@@ -54,7 +54,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
           <Tooltip title="Settings"
             className="hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
             <button type="button" onClick={() => {}}>
-              <SettingsIcon />
+              <SettingsIcon fontSize="large" />
             </button>
           </Tooltip>
 
@@ -62,7 +62,7 @@ const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}
           <Tooltip title="Profile"
             className="hover:scale-110 transition-all duration-150 ease-in-out">
             <button type="button" onClick={() => {}}>
-              <AccountCircleIcon />
+              <AccountCircleIcon fontSize="large" />
             </button>
           </Tooltip>
         </div>
