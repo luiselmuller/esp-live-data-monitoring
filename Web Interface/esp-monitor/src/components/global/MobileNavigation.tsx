@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-import { links } from '../../data/navLinks';
 
 type mobileNavProps = {
   handleMobileNavOpen?: any,

@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCeiMOP52fq_dPAdTG3sWCSbSLDGuJwS2g",
+    apiKey: import.meta.env.VITE_FIRESTORE_API,
     authDomain: "esp32-monitor-2244b.firebaseapp.com",
     databaseURL: "https://esp32-monitor-2244b-default-rtdb.firebaseio.com",
     projectId: "esp32-monitor-2244b",

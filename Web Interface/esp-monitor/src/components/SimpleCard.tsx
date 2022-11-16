@@ -7,6 +7,7 @@ import OpacityTwoToneIcon from '@mui/icons-material/OpacityTwoTone'; // temporar
 import AirIcon from '@mui/icons-material/Air';
 import TerrainOutlinedIcon from '@mui/icons-material/TerrainOutlined';
 import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
+import EmojiObjectsOutlinedIcon from '@mui/icons-material/EmojiObjectsOutlined';
 
 // Icons (they use the collection id to link to the data)
 const GroundMovementsIcon = <TerrainOutlinedIcon fontSize="large"/>;
@@ -15,7 +16,9 @@ const HumidityIcon = <OpacityTwoToneIcon fontSize="large"/>;
 const AirQualityIcon = <AirIcon fontSize="large"/>;
 const WaterLevelIcon = <WaterIcon fontSize="large"/>;
 const SoilMoistureIcon = <GrassIcon fontSize="large"/>;
+const PhotoresistorIcon = <EmojiObjectsOutlinedIcon fontSize="large"/>;
 const DefaultIcon = <StraightenOutlinedIcon fontSize="large" className="rotate-45" />;
+
 
 type cardProps = {
     title?: string,
@@ -29,7 +32,7 @@ type cardProps = {
 
 }
 
-const SimpleCard:FC<cardProps> = ({title=" ", width="w-72", height="h-28", icon=" ",
+const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=" ",
  bg="bg-secondary-dark-bg", iconColor="text-white", iconBg="bg-main-dark-bg", data=0}) => {
   return (
     <div className={`${width} ${height} ${bg} rounded-3xl flex items-center`}>
@@ -42,6 +45,7 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-72", height="h-28", icon=
             icon === "AirQuality" ? AirQualityIcon :
             icon === "SoilMoisture" ? SoilMoistureIcon :
             icon === "WaterLevel" ? WaterLevelIcon :
+            icon === "Photoresistor" ? PhotoresistorIcon :
             DefaultIcon
           }
         </div>

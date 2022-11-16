@@ -1,8 +1,9 @@
-import React, { FC, lazy, useEffect, useState } from 'react'
+import React, { FC, lazy, Suspense, useEffect, useState } from 'react'
 
-import WifiIcon from '@mui/icons-material/Wifi';
+import { CircularProgress } from '@mui/material';
 
 const SimpleCard = lazy(() => import('../components/SimpleCard'));
+const Widget = lazy(() => import('../components/Widget'));
 
 type overviewProps = {
   sensorData?: any,
@@ -10,11 +11,8 @@ type overviewProps = {
 
 // Simplified view of the data
 const Overview:FC<overviewProps> = ({sensorData}) => {
-  
-  
-
   return (
-    <div className="mt-16 md:mt-5">
+    <div className="mt-16 md:mt-12 flex flex-col gap-10">
       {/* Cards */}
       <div className="flex flex-wrap justify-center gap-4 sm:px-4">
         {/* TODO: Make the cards render according to the sensor data
@@ -26,13 +24,17 @@ const Overview:FC<overviewProps> = ({sensorData}) => {
         {Array.isArray(sensorData) && sensorData.map(
           (sensor: any) => (
             <div key={sensor.id}>
-              <SimpleCard
-                title={sensor.name}
-                data={<p>
-                  {sensor.reading}
-                </p>}
-                icon={sensor.id}
-              />
+              <Suspense fallback={<CircularProgress />}>
+                <SimpleCard
+                  title={sensor.name}
+                  data={
+                    <p>
+                      {sensor.reading}
+                    </p>
+                  }
+                  icon={sensor.id}
+                />
+              </Suspense>
             </div>
           )
         )}
@@ -40,8 +42,10 @@ const Overview:FC<overviewProps> = ({sensorData}) => {
       {/* TODO: Make the widgets also optional somehow and render them according to options 
       checked in the settings */}
       {/* Widgets */}
-      <div className="flex flex-wrap justify-center gap-4 px-4 bg-white">
-
+      <div className="flex flex-wrap justify-center items-center gap-4 sm:px-4">
+        <div>
+          
+        </div>
       </div>
     </div>
   )

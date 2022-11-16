@@ -4,7 +4,7 @@ import './App.css'
 
 import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/global/Navbar'
-import { createTheme, Snackbar, ThemeProvider } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material'
 
 // Lazy load components
 const Overview = lazy(() => import('./pages/Overview'))
@@ -15,6 +15,7 @@ const MobileNavigation = lazy(() => import('./components/global/MobileNavigation
 // Firebase
 import db from './firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+
 
 // Theme
 const darkTheme = createTheme({
@@ -78,6 +79,15 @@ function App() {
     }
     
   }, [screenSize, setSidebarOpen])
+
+  // *** Snackbar testing var 
+  // TODO: Make functional
+  const [open, setOpen] = useState(false);
+  let notifications = " ";
+
+  const handleSnackbar = () => {
+    notifications != " " ? setOpen(true) : setOpen(false)
+  }
 
 
   return (
