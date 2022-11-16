@@ -34,6 +34,9 @@ type cardProps = {
 
 const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=" ",
  bg="bg-secondary-dark-bg", iconColor="text-white", iconBg="bg-main-dark-bg", data=0}) => {
+  
+  let tempType = "℉";
+  
   return (
     <div className={`${width} ${height} ${bg} rounded-3xl flex items-center`}>
       <div className="ml-8">
@@ -52,7 +55,19 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=
       </div>
       <div className="ml-8">
         <p className="text-slate-200 opacity-50 text-sm mb-2 capitalize">{title}</p>
-        <p className="text-2xl">{data}</p>
+        <p className="text-2xl flex gap-2">
+          {
+            data
+          }
+          {
+            title === "temperature" ? tempType :
+            title === "humidity" ? "%" :
+            title === "soil moisture" ? "%" :
+            title === "air quality" ? "PPM" :
+            title === "water level" ? "L" :
+            " "
+          }  
+        </p>
         {/* TODO: Add here the symbol conditionaly with the type of sensor */}
       </div>
     </div>

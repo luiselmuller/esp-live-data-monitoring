@@ -26,7 +26,8 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
           <p className="ml-2 opacity-50">Data</p>
           {/* Temporary */}
           <NavLink to="/" 
-          className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out">
+          className={({ isActive }) => isActive ? activeLink : normalLink}
+          >
             <CalendarViewMonthIcon />
             Overview
           </NavLink>
@@ -37,7 +38,8 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
           <p className="ml-2 opacity-50">Device</p>
           {/* Temporary */}
           <NavLink to="/device-statistics"
-          className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out">
+          className={({ isActive }) => isActive ? activeLink : normalLink}
+          >
             <MonitorHeartIcon />
             Device Statistics
           </NavLink>
