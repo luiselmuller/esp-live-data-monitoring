@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import EngineeringIcon from '@mui/icons-material/Engineering'; //temporary
 
-const DeviceStatistics = () => {
+type deviceProps = {
+  deviceData?: any,
+}
+
+const DeviceStatistics:FC<deviceProps> = (deviceData) => {
   return (
     <div className="mt-16">
       {/* Temporary */}

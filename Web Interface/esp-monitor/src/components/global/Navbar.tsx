@@ -14,26 +14,31 @@ import { Badge } from '@mui/material';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
 
 type navProps = {
-  customFuncOne: any,
-  disabledSide: any,
-  mobileNav: any,
-  customFuncTwo: any
+  customFuncOne?: any,
+  disabledSide?: any,
+  mobileNav?: any,
+  customFuncTwo?: any,
+  microStatus?: any
 }
 
-const Navbar:FC<navProps> =({customFuncOne={}, customFuncTwo={}, disabledSide={}, mobileNav={}}) => {
+const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus}) => {
   let notificationNumber = 0;
   let theme = 0;
-  
+
   return (
-    <div className={`flex justify-evenly p-3 relative mx-3`}>
+    <div className={`flex justify-evenly items-center p-3 relative mx-3`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
+        <div className="flex gap-2 items-center sm:text-lg text-md">
+          <div className={`${microStatus[0] ? "bg-green-400" : "bg-red-400"} h-3 w-3 ml-5 rounded-full`}></div>
+          {!disabledSide && <p>{microStatus[0] ? "Online" : "Offline"}</p>} 
+        </div>
 
         <div className="w-full"></div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-2 sm:gap-4">
           <Tooltip title="Theme">
             <button type="button" onClick={() => {}}
               className={`hover:scale-110 transition-all duration-150 ease-in-out outline-none`}>
