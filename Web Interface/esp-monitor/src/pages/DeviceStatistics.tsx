@@ -9,27 +9,33 @@ type deviceProps = {
 
 const DeviceStatistics:FC<deviceProps> = (deviceData) => {
   return (
-    <div className="mt-16 md:mt-5">
+    <div className="mt-16 md:mt-5 px-7">
+      <h2 className="text-2xl opacity-80 mb-5">Microcontroller</h2>
       {/* Temporary */}
-      <div className="flex sm:flex-row flex-col justify-center items-center h-full w-full gap-10 text-2xl">
-        <div className="flex flex-col gap-4 px-7 w-full sm:w-fit">
-          <p>Microcontroller</p>
-          <div className="flex flex-col gap-2">
-            <p className="text-sm"><span className="opacity-70">Name: </span>ESP32 WROOM-32</p>
-            <p className="text-sm"><span className="opacity-70">Status: </span>Offline</p>
-            <p className="text-sm"><span className="opacity-60">Uptime: </span>1 hr</p>
-            <p className="text-sm"><span className="opacity-60">Address: </span>FB:7D:AA:5A:45:B8</p>
-          </div>
+      <div className="flex flex-col gap-5 ">
+        <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+          <p className="flex w-full">Name</p>
+          <p className="flex w-full">ESP32 WROOM-32</p>
+        </div>
+        
+        <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+          <p className="flex w-full">Status</p>
+          <p className="flex w-full">Offline</p>
         </div>
 
-        <div className="flex flex-col gap-4 px-7 w-full sm:w-fit">
-          <p>Sensors</p>
-          <div className="flex flex-col gap-2">
-            <p className="text-sm"><span className="opacity-70">Temperature: </span>Working</p>
-            <p className="text-sm"><span className="opacity-70">Humidity: </span>Working</p>
-            <p className="text-sm"><span className="opacity-60">Soil Moisture: </span>Working</p>
-            <p className="text-sm"><span className="opacity-60">Air Quality: </span>Working</p>
-          </div>
+        <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+          <p className="flex w-full">Uptime</p>
+          <p className="flex w-full">20 days</p>
+        </div>
+
+        <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+          <p className="flex w-full">Last Online</p>
+          <p className="flex w-full">11/15/2022</p>
+        </div>
+
+        <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+          <p className="flex w-full">Address</p>
+          <p className="flex w-full">5C:BD:31:B6:51:B8</p>
         </div>
       </div>
     </div>

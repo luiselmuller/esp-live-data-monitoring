@@ -31,8 +31,9 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
-        <div className="flex gap-2 items-center sm:text-lg text-md">
-          <div className={`${microStatus[0] ? "bg-green-400" : "bg-red-400"} h-3 w-3 ml-5 rounded-full`}></div>
+        <div className={`flex gap-2 items-center sm:text-lg text-md md:border border-secondary-dark-bg
+        rounded-full py-1 px-4 ml-5`}>
+          <div className={`${microStatus[0] ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full`}></div>
           {!disabledSide && <p>{microStatus[0] ? "Online" : "Offline"}</p>} 
         </div>
 
