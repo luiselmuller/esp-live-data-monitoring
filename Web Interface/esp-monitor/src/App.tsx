@@ -104,7 +104,7 @@ function App() {
               <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
                 <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                   {/* Mobile Sidebar */}
-                  <div className={`${mobileNavOpen ? "h-screen" : "h-0 overflow-hidden"}
+                  <div className={`${mobileNavOpen ? "h-screen z-[100]" : "h-0 overflow-hidden"}
                   bg-main-dark-bg transition-all duration-150 ease-linear fixed`}>
                       <MobileNavigation 
                         handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}

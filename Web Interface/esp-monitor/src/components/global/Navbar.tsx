@@ -26,7 +26,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
   let theme = 0;
 
   return (
-    <div className={`flex justify-evenly items-center p-3 relative mx-3`}>
+    <div className={`flex justify-evenly items-center p-3 relative mx-3 z-[10000]`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
