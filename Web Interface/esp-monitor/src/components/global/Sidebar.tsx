@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 
 type sidebarProps = {
   sideIsOpen: any,
@@ -30,6 +31,13 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
           >
             <CalendarViewMonthIcon />
             Overview
+          </NavLink>
+
+          <NavLink to="/detailed-view" 
+          className={({ isActive }) => isActive ? activeLink : normalLink}
+          >
+            <GridViewOutlinedIcon />
+            Detailed View
           </NavLink>
         </div>
 

@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material'
 
 // Lazy load components
 const Overview = lazy(() => import('./pages/Overview'))
+const DetailedView = lazy(() => import('./pages/DetailedView'))
 const DeviceStatistics = lazy(() => import('./pages/DeviceStatistics'))
 const Sidebar = lazy(() => import('./components/global/Sidebar'))
 const MobileNavigation = lazy(() => import('./components/global/MobileNavigation'))
@@ -126,6 +127,7 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Overview sensorData={sensors} />} />
                     <Route path="/overview" element={<Overview sensorData={sensors} />} />
+                    <Route path="/detailed-view" element={<DetailedView sensorData={sensors}/>} />
                     <Route path="/device-statistics" element={<DeviceStatistics deviceData={devices}/>} />
                   </Routes>
                 </div>

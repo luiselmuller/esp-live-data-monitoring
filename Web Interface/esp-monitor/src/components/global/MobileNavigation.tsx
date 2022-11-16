@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+
 
 type mobileNavProps = {
   handleMobileNavOpen?: any,
@@ -21,9 +23,15 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
               <p className="ml-2 opacity-50">Data</p>
               {/* Temporary */}
               <NavLink to="/" onClick={handleMobileNavOpen}
-              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out">
-                <CalendarViewMonthIcon />
+              className=" flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+                <CalendarViewMonthIcon fontSize="large"/>
                 Overview
+              </NavLink>
+
+              <NavLink to="/detailed-view" onClick={handleMobileNavOpen}
+              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+                <GridViewOutlinedIcon fontSize="large"/>
+                Detailed View
               </NavLink>
             </div>
 
@@ -32,8 +40,8 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
               <p className="ml-2 opacity-50">Device</p>
               {/* Temporary */}
               <NavLink to="/device-statistics" onClick={handleMobileNavOpen}
-              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out">
-                <MonitorHeartIcon />
+              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+                <MonitorHeartIcon fontSize="large"/>
                 Device Statistics
               </NavLink>
             </div>
