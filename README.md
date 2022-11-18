@@ -4,4 +4,4 @@ This is a work in progress microcontroller dashboard, part of my final project f
 [View the live site](https://dashboard32.netlify.app/)
 
 ### Built With
-[![](https://skills.thijs.gg/icons?i=react,vite,ts&theme=light)](https://skillicons.dev/)
+[![](https://skills.thijs.gg/icons?i=react,vite,ts&theme=dark)](https://skillicons.dev/)
