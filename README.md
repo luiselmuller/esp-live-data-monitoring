@@ -1,6 +1,6 @@
 ## About This Project
 
-This is a work in progress microcontroller dashboard, part of my final project for one of the classes i'm currently taking.
+This is a work in progress microcontroller dashboard, part of my final project for one of the classes i'm currently taking. <br>
 [View the live site](https://dashboard32.netlify.app/)
 
 ### Built With
