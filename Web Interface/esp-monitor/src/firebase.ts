@@ -1,18 +1,21 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIRESTORE_API,
-    authDomain: "esp32-monitor-2244b.firebaseapp.com",
-    databaseURL: "https://esp32-monitor-2244b-default-rtdb.firebaseio.com",
-    projectId: "esp32-monitor-2244b",
-    storageBucket: "esp32-monitor-2244b.appspot.com",
-    messagingSenderId: "280167063041",
-    appId: "1:280167063041:web:83c702f2d2df8ef88b2a00",
-    measurementId: "G-ER8PQC6BYT"
+    authDomain: import.meta.env.VITE_FIRESTORE_AUTH,
+    databaseURL: import.meta.env.VITE_FIRESTORE_URL,
+    projectId: import.meta.env.VITE_FIRESTORE_PID,
+    storageBucket: import.meta.env.VITE_FIRESTORE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIRESTORE_SENDER_ID,
+    appId: import.meta.env.VITE_FIRESTORE_APP_ID,
+    measurementId: import.meta.env.VITE_FIRESTORE_MEASURE_ID
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+export const auth = getAuth(app);
+
 export default db;

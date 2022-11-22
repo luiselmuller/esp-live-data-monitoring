@@ -68,7 +68,6 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=
             " "
           }  
         </p>
-        {/* TODO: Add here the symbol conditionaly with the type of sensor */}
       </div>
     </div>
   )

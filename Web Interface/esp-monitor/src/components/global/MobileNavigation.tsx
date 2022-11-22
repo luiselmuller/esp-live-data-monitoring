@@ -8,10 +8,11 @@ import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 
 type mobileNavProps = {
   handleMobileNavOpen?: any,
-  mobileNavOpen?: any
+  mobileNavOpen?: any,
 }
 
 const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen}) => {
+  const navStyle = "outline-none  flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out"
 
   return (
     <div className="w-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -23,13 +24,13 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
               <p className="ml-2 opacity-50">Data</p>
               {/* Temporary */}
               <NavLink to="/" onClick={handleMobileNavOpen}
-              className=" flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+              className={navStyle}>
                 <CalendarViewMonthIcon fontSize="large"/>
                 Overview
               </NavLink>
 
               <NavLink to="/detailed-view" onClick={handleMobileNavOpen}
-              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+              className={navStyle}>
                 <GridViewOutlinedIcon fontSize="large"/>
                 Detailed View
               </NavLink>
@@ -40,7 +41,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
               <p className="ml-2 opacity-50">Device</p>
               {/* Temporary */}
               <NavLink to="/device-statistics" onClick={handleMobileNavOpen}
-              className="flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out">
+              className={navStyle}>
                 <MonitorHeartIcon fontSize="large"/>
                 Device Statistics
               </NavLink>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, lazy, useEffect, useState } from 'react'
 
 // Icon imports
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,23 +12,48 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
+import Notifications from './Notifications';
+import Settings from './Settings';
+import Account from './Account';
+
+// Firebase
+import db from '../../firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
+
+
 
 type navProps = {
   customFuncOne?: any,
   disabledSide?: any,
   mobileNav?: any,
   customFuncTwo?: any,
-  microStatus?: any
+  microStatus?: any,
+  clickedMenu?: any,
+  setClickedMenu?: any,
+  mode?: any,
+  theme? : any
 }
 
-const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus}) => {
+const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus, clickedMenu, setClickedMenu,
+mode, theme}) => {
+  const [notifications, setNotifications] = useState([{}]);
+  // True === dark false === light
+  
+
+  // Getting notifications
+  useEffect(() => 
+    onSnapshot(
+    (collection(db,"Notifications")), 
+        (snapshot) => 
+        setNotifications(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    ), []);
+
   let notificationNumber = 0;
-  let theme = 0;
 
   return (
     <div className={`flex justify-evenly items-center p-3 relative mx-3 z-[10000]`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
-          className={`hover:scale-110 transition-all duration-150 ease-in-out`}>
+          className={`outline-none hover:scale-110 transition-all duration-150 ease-in-out`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
         <div className={`flex gap-2 items-center sm:text-lg text-md lg:border border-secondary-dark-bg
@@ -41,16 +66,17 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
 
         <div className="flex gap-2 sm:gap-4">
           <Tooltip title="Theme">
-            <button type="button" onClick={() => {}}
-              className={`hover:scale-110 transition-all duration-150 ease-in-out outline-none`}>
-              {theme ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
+            <button type="button" onClick={mode}
+              className={`hover:scale-110 transition-all duration-200 ease-in-out outline-none active:rotate-180`}>
+              {theme === "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
-
+          
+          {/* Notifications */}
           {!mobileNav && 
             <Tooltip title="Notifications"
-            className="hover:scale-110 transition-all duration-150 ease-in-out">
-              <button type="button" onClick={() => {}}>
+            className="outline-none hover:scale-110 transition-all duration-150 ease-in-out">
+              <button type="button" onClick={() => setClickedMenu('notifications')}>
                 <Badge badgeContent={notificationNumber} color="info" overlap="circular">
                   {notificationNumber > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
                 </Badge>
@@ -61,8 +87,8 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           {/* Settings */}
           {!mobileNav && 
             <Tooltip title="Settings"
-              className="hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
-              <button type="button" onClick={() => {}}>
+              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
+              <button type="button" onClick={() => setClickedMenu('settings')}>
                 <SettingsIcon fontSize="large" />
               </button>
             </Tooltip>
@@ -71,15 +97,20 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           {/* Profile */}
           {!mobileNav && 
             <Tooltip title="Profile"
-              className="hover:scale-110 transition-all duration-150 ease-in-out">
-              <button type="button" onClick={() => {}}>
+              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out">
+              <button type="button" onClick={() => setClickedMenu('account')}>
                 <AccountCircleIcon fontSize="large" />
               </button>
             </Tooltip>
           }
+
+          {/* Logic for the dropdown menus */}
+          {!mobileNav && 
+            clickedMenu === "notifications" ? <Notifications menuFunc={setClickedMenu} notifs={notifications}/> :
+            clickedMenu === "settings" ? <Settings menuFunc={setClickedMenu}/> :
+            clickedMenu === "account" ? <Account menuFunc={setClickedMenu}/> :" "
+          }
         </div>
-      <div>
-      </div>
     </div>
   )
 }

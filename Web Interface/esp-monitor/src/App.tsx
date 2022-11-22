@@ -25,17 +25,30 @@ const darkTheme = createTheme({
   },
 });
 
-// TODO: Make sidebar links be highlighted when on that page
-
 function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [screenSize, setScreenSize] = useState(1920);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarDisabled, setSidebarDisabled] = useState(false);
   const [mobileNavDisabled, setMobileNavDisabled] = useState(true);
+  const [clickedMenu, handleClickedMenu] = useState('none');
 
   const [devices, setDevices] = useState({});
   const [sensors, setSensors] = useState({});
+
+  const [theme, setTheme] = useState('dark');
+
+  const setMode = () => {
+    if(theme === 'dark'){
+      setTheme('light');
+      localStorage.setItem('themeMode', 'light');
+    }
+    else{
+      setTheme('dark');
+      localStorage.setItem('themeMode', 'dark');
+    }
+    
+  }
 
   // Getting sensor readings
   useEffect(() => 
@@ -45,7 +58,7 @@ function App() {
         setSensors(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
     ), []);
 
-  // Getting device statistics
+  // Getting microncontroller statistics
   useEffect(() => 
     onSnapshot(
     (collection(db,"DeviceStatistics")), 
@@ -94,9 +107,9 @@ function App() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <ThemeProvider theme={darkTheme}>
-        <div className="App">
+        <div  className={theme === 'Dark' ? 'dark' : ' '}>
           <Router>
-            <div className="flex relative bg-main-dark-bg text-slate-200">
+            <div className="flex relative bg-main-bg dark:bg-main-dark-bg text-slate-200">
               {/* Sidebar  */}
               <div className={`${sidebarOpen ? "w-72 " : "w-0 overflow-hidden"} 
               bg-secondary-dark-bg transition-all duration-150 ease-out`}>
@@ -119,6 +132,10 @@ function App() {
                     disabledSide={sidebarDisabled}
                     mobileNav={mobileNavOpen}
                     microStatus={microStatus}
+                    clickedMenu={clickedMenu}
+                    setClickedMenu={handleClickedMenu}
+                    mode={setMode}
+                    theme={theme}
                   />
                 </div>
 
