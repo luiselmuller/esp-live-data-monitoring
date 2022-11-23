@@ -30,12 +30,12 @@ type navProps = {
   microStatus?: any,
   clickedMenu?: any,
   setClickedMenu?: any,
-  mode?: any,
+  handleTheme?: any,
   theme? : any
 }
 
 const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus, clickedMenu, setClickedMenu,
-mode, theme}) => {
+  handleTheme, theme}) => {
   const [notifications, setNotifications] = useState([{}]);
   // True === dark false === light
   
@@ -64,9 +64,10 @@ mode, theme}) => {
 
         <div className="w-full"></div>
 
+        {/* Theme */}
         <div className="flex gap-2 sm:gap-4">
           <Tooltip title="Theme">
-            <button type="button" onClick={mode}
+            <button type="button" onClick={handleTheme}
               className={`hover:scale-110 transition-all duration-200 ease-in-out outline-none active:rotate-180`}>
               {theme === "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
@@ -77,8 +78,8 @@ mode, theme}) => {
             <Tooltip title="Notifications"
             className="outline-none hover:scale-110 transition-all duration-150 ease-in-out">
               <button type="button" onClick={() => setClickedMenu('notifications')}>
-                <Badge badgeContent={notificationNumber} color="info" overlap="circular">
-                  {notificationNumber > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
+                <Badge badgeContent={notifications.length} color="info" overlap="circular">
+                  {notifications.length > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
                 </Badge>
               </button>
             </Tooltip>

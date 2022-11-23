@@ -6,15 +6,30 @@ import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, X
 const SimpleCard = lazy(() => import('../components/SimpleCard'));
 const Widget = lazy(() => import('../components/Widget'));
 
+// Firebase
+import db from '../firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
+
 
 type overviewProps = {
-  sensorData?: any,
+
 }
 
 // Simplified view of the data
-const Overview:FC<overviewProps> = ({sensorData}) => {
+const Overview:FC<overviewProps> = ({}) => {
   let tempData: any[] = [{"date": 10, "temperature": 30},{"date": 10, "temperature": 57},{"date": 10, "temperature": 23},{"date": 10, "temperature": 96}];
 
+  //TODO: Try to only get temperature and humidity chart data on here
+
+  const [sensors, setSensors] = useState({});
+
+  // Getting sensor readings
+  useEffect(() => 
+    onSnapshot(
+    (collection(db,"Sensors")), 
+        (snapshot) => 
+        setSensors(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    ), []);
 
   return (
     <div className="mt-16 md:mt-12 flex flex-col gap-10">
@@ -23,7 +38,7 @@ const Overview:FC<overviewProps> = ({sensorData}) => {
         {/* TODO: Decide on notification severity categories, could use
             none, minor, dangerous/medium, severe */}
   
-        {Array.isArray(sensorData) && sensorData.map(
+        {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
             <div key={sensor.id}>
               <Suspense fallback={<CircularProgress />}>

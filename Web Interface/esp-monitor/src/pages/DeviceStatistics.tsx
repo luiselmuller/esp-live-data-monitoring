@@ -18,9 +18,16 @@ const DeviceStatistics:FC<deviceProps> = ({deviceData}) => {
         {Array.isArray(deviceData) && deviceData.map(
           (device: any) => (
             <div key={device.id}>
-              <div className="flex w-full bg-secondary-dark-bg p-7 rounded-xl">
+              <div className="flex w-full bg-slate-300 dark:bg-secondary-dark-bg p-7 rounded-xl">
                 <p className="flex w-full">{device.id}</p>
-                <p className="flex w-full">{device.info}</p>
+                <p className="flex w-full">{
+                  device.id === "Uptime" ? (
+                    // TODO: change millis to human readable time
+                    device.info
+                  ) :
+                  device.info
+
+                }</p>
               </div>
             </div>
           )

@@ -8,7 +8,7 @@ type accountProps = {
 const Account:FC<accountProps> = ({menuFunc}) => {
   return (
     <ClickAwayListener onClickAway={() => {menuFunc('none')}}>
-      <div className={`absolute mt-12 bg-secondary-dark-bg h-96 w-72 sm:-translate-x-[100px] -translate-x-[135px]
+      <div className={`absolute mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-96 w-72 sm:-translate-x-[100px] -translate-x-[135px]
       shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-scroll`}>
         <div className="p-2 flex gap-10 items-center border-b-2 border-slate-100 border-opacity-30">
           <h2 className="w-full text-center font-bold -translate-x-7 text-sm">Account</h2>

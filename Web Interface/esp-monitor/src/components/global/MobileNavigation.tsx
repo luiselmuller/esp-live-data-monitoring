@@ -12,7 +12,7 @@ type mobileNavProps = {
 }
 
 const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen}) => {
-  const navStyle = "outline-none  flex items-center gap-2 hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out"
+  const navStyle = "outline-none  flex items-center gap-2 hover:bg-main-bg dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-xl transition-all duration-100 ease-in-out"
 
   return (
     <div className="w-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
