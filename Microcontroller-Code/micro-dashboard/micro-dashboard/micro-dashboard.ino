@@ -2,14 +2,6 @@
 #include <Firebase_ESP_Client.h>
 #include <addons/TokenHelper.h>
 
-#define WIFI_SSID "LIB-9709159"
-#define WIFI_PASS "p6gwFntFyckm"
-
-#define API_KEY "AIzaSyCeiMOP52fq_dPAdTG3sWCSbSLDGuJwS2g"
-#define FIREBASE_PROJECT_ID "esp32-monitor-2244b"
-
-#define USER_EMAIL "luiselmuller@gmail.com"
-#define USER_PASS "h9LZCLBS"
 
 // Firebase data object
 FirebaseData fbdo;

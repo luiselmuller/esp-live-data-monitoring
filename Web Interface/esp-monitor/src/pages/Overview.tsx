@@ -32,12 +32,11 @@ const Overview:FC<overviewProps> = ({}) => {
     ), []);
 
   return (
-    <div className="mt-16 md:mt-12 flex flex-col gap-10">
+    <div className="mt-16 md:mt-12 flex flex-col gap-10 sm:px-4">
       {/* Cards */}
-      <div className="flex flex-wrap justify-center gap-6 sm:px-4">
+      <div className="flex flex-wrap justify-center gap-6">
         {/* TODO: Decide on notification severity categories, could use
             none, minor, dangerous/medium, severe */}
-  
         {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
             <div key={sensor.id}>
