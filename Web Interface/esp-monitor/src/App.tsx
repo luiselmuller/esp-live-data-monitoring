@@ -76,7 +76,7 @@ function App() {
 
   return (
     <Suspense fallback={<LoadingScreen />}>
-        <div  className="">
+        <div className="">
           <Router>
             <div className="flex relative bg-main-bg dark:bg-main-dark-bg dark:text-slate-200 text-main-dark-bg">
               {/* Sidebar  */}

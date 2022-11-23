@@ -1,1 +1,0 @@
-import{j as r}from"./index.f666507b.js";const s=({widWidth:e="w-2/4",widHeight:d="h-96",widType:a="",widIcon:t,widTitle:i="Weather"})=>r("div",{className:`${e} ${d} bg-secondary-dark-bg rounded-xl`});export{s as default};
