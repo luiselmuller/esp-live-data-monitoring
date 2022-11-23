@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { GuardSpinner } from "react-spinners-kit"
 
 const LoadingScreen = () => {

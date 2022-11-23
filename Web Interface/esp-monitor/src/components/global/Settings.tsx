@@ -1,5 +1,5 @@
-import { Backdrop, Box, ClickAwayListener, Fade, Modal, Typography } from '@mui/material'
-import React, { FC } from 'react'
+import { ClickAwayListener} from '@mui/material'
+import { FC } from 'react'
 
 type settingProps = {
   menuFunc?: any

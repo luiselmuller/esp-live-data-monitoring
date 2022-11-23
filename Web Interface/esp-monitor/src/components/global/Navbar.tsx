@@ -1,4 +1,4 @@
-import React, { FC, lazy, useEffect, useState } from 'react'
+import { FC, lazy, useEffect, useState } from 'react'
 
 // Icon imports
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,6 +12,8 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
+
+// TODO: Try lazy loading these
 import Notifications from './Notifications';
 import Settings from './Settings';
 import Account from './Account';
@@ -37,8 +39,6 @@ type navProps = {
 const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus, clickedMenu, setClickedMenu,
   handleTheme, theme}) => {
   const [notifications, setNotifications] = useState([{}]);
-  // True === dark false === light
-  
 
   // Getting notifications
   useEffect(() => 
@@ -47,8 +47,6 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
         (snapshot) => 
         setNotifications(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
     ), []);
-
-  let notificationNumber = 0;
 
   return (
     <div className={`flex justify-evenly items-center p-3 relative mx-3 z-[10000]`}>

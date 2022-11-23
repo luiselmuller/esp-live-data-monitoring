@@ -1,8 +1,4 @@
-import React, { FC, Suspense, useEffect, useState } from 'react'
-
-import EngineeringIcon from '@mui/icons-material/Engineering'; //temporary
-import { CircularProgress } from '@mui/material';
-import WifiIcon from '@mui/icons-material/Wifi'
+import { FC} from 'react'
 
 type deviceProps = {
   deviceData?: any,

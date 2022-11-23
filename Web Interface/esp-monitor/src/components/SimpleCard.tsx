@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import WaterIcon from '@mui/icons-material/Water';

@@ -1,5 +1,5 @@
 import { ClickAwayListener } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 type accountProps = {
   menuFunc?: any

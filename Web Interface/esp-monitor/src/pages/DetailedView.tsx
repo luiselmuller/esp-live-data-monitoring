@@ -1,5 +1,4 @@
-import React, { FC, Suspense, useEffect, useState } from 'react'
-import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
+import { FC, Suspense, useEffect, useState } from 'react'
 
 // charts
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';

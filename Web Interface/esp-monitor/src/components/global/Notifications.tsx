@@ -1,5 +1,5 @@
 import { CircularProgress, ClickAwayListener } from '@mui/material'
-import React, { FC, lazy, Suspense } from 'react'
+import { FC, lazy, Suspense } from 'react'
 
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 

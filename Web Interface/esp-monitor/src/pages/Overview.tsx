@@ -1,4 +1,4 @@
-import React, { FC, lazy, Suspense, useEffect, useState } from 'react'
+import { FC, lazy, Suspense, useEffect, useState } from 'react'
 
 import { CircularProgress } from '@mui/material';
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
