@@ -13,7 +13,6 @@ import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
 
-// TODO: Try lazy loading these
 import Notifications from './Notifications';
 import Settings from './Settings';
 import Account from './Account';

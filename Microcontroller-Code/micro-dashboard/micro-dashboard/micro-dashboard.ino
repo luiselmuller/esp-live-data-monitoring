@@ -2,6 +2,9 @@
 #include <Firebase_ESP_Client.h>
 #include <addons/TokenHelper.h>
 
+// Sensor libraries
+
+
 
 // Firebase data object
 FirebaseData fbdo;
@@ -9,9 +12,13 @@ FirebaseAuth auth;
 FirebaseConfig config;
 
 unsigned long dataMillis = 0;
-unsigned long dataDelay = 25000;
+unsigned long dataDelay = 30000;
 
 // Declare sensor objects
+//Temperature* temperature = new Temperature(29);
+//NonBlockingDallas tempSensor(temperature->getSensor());
+
+//DHT_nonblocking dht_sensor( 4, DHT_SENSOR_TYPE );
 
 // Array of sensor objects being used
 String sensors[6] = {"Temperature", "Humidity", "GroundMovements", "SoilMoisture", "AirQuality", "WaterLevel"};
@@ -51,7 +58,7 @@ void updateField(String collection, String docID, String field, String type, T v
 
 void updateDataCards(){
   for(int i = 0; i < 6; i++){
-    updateField("Sensors", sensors[i], "reading", "integerValue", String(random(100)).c_str());
+    updateField("Sensors", sensors[i], "reading", "integerValue", random(100));
   }
 }
 
@@ -97,3 +104,13 @@ void initWifi(){
   updateField("DeviceStatistics", "Database", "info", "stringValue", String(FIREBASE_CLIENT_VERSION).c_str());
   
 }
+
+////////////////////// Temperature sensor callback functions  //////////////////////
+
+//void handleIntervalElapsed(float t, bool valid, int deviceIndex){
+  
+//}
+
+//void handleTemperatureChange(float t, bool valid, int deviceIndex){
+//  temperature->setTemperature(t);
+//}

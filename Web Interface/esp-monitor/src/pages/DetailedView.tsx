@@ -1,12 +1,10 @@
-import { FC, Suspense, useEffect, useState } from 'react'
-
-// charts
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { CircularProgress } from '@mui/material';
+import { FC, lazy, Suspense, useEffect, useState } from 'react'
 
 // Firebase
 import db from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+
+const RenderChart = lazy(() => import('../components/RenderChart'));
 
 
 type detailedProps = {
@@ -14,12 +12,13 @@ type detailedProps = {
 }
 
 // Temperature chart data
-let tempData:   any[] = [];
-let humData:    any[] = [];
-let waterData:  any[] = [];
-let groundData: any[] = [];
-let airData:    any[] = [];
-let soilData:   any[] = [];
+let tempHumData: any[] = [];
+let tempData:    any[] = [];
+let humData:     any[] = [];
+let waterData:   any[] = [];
+let groundData:  any[] = [];
+let airData:     any[] = [];
+let soilData:    any[] = [];
 
 const DetailedView:FC<detailedProps> = ({chartData}) => {
   const chartDataLimit = 10;
@@ -42,147 +41,147 @@ const DetailedView:FC<detailedProps> = ({chartData}) => {
   // put in a for loop to get each update for each sensor and put it in the respective array
   // Temperature data
   useEffect(() => {
-      if(tempData.length <= chartDataLimit){
-        tempData.push(
-          {"date": date + " - " + time, "temperature": Math.random() * 100} //sensors[4].reading
-        )
+    if(tempHumData.length <= chartDataLimit){
+      tempHumData.push(
+        {"temperature": sensors[4]?.reading, "humidity": sensors[2]?.reading} //sensors[4].reading
+      )
+    }
+    else{
+      tempHumData.shift();
+    }
+  }, [sensors[4]?.reading, sensors[2]?.reading])
+
+  useEffect(() => {
+    for(let i = 0; i < sensors.length; i++){
+      switch(sensors[i].name){
+        case 'temperature':
+          if(tempData.length <= chartDataLimit){
+            tempData.push(
+              {"Temperature": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            tempData.shift();
+          }
+        break;
+        case 'humidity':
+          if(humData.length <= chartDataLimit){
+            humData.push(
+              {"Humidity": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            humData.shift();
+          }
+        break;
+        case 'air quality':
+          if(airData.length <= chartDataLimit){
+            airData.push(
+              {"Air PPM": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            airData.shift();
+          }
+        break;
+        case 'soil moisture':
+          if(soilData.length <= chartDataLimit){
+            soilData.push(
+              {"Soil Moisture": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            soilData.shift();
+          }
+        break;
+        case 'ground movements':
+          if(groundData.length <= chartDataLimit){
+            groundData.push(
+              {"Ground Movement": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            groundData.shift();
+          }
+        break;
+        case 'water level':
+          if(waterData.length <= chartDataLimit){
+            waterData.push(
+              {"Water Level": sensors[i]?.reading,} //sensors[4].reading
+            )
+          }
+          else{
+            waterData.shift();
+          }
+        break;
+
+
       }
-      else{
-        tempData.shift();
-      }
-      console.log(tempData)
-    }, [currentDate.getSeconds()])
+    }
+  }, [sensors])
+
 
   return (
-    <div className="gap-6 mt-16 w-full h-full flex justify-center flex-wrap items-center pb-36 sm:px-0 px-2">
-      {/* TODO:figure out how to do this better */}
-      {Array.isArray(sensors) && sensors.map(
+    <div className="gap-6 mt-5 w-full h-full flex justify-center flex-wrap items-center pb-36 sm:px-5 px-2">
+      <RenderChart 
+        sensorName={"Temperature and Humidity"}
+        sensorData={tempHumData}
+        lines={[["temperature", "#05B5C6"], ["humidity", "#4961E4"]]}
+      />
+
+      <div  className="flex items-center justify-center flex-wrap gap-6 w-full h-fit">
+        {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
-            <div key={sensor.id} className="h-[500px] max-w-[650px] w-full rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10">
-              <p className="mb-5 capitalize text-xl text-slate-700 dark:text-slate-400">{sensor.name} chart</p>
-              <Suspense fallback={<CircularProgress />}>
-                {
-                  sensor.id === "Temperature" ?
-                    <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="date" />
-                        <YAxis dataKey="temperature"/>
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  sensor.id === "Humidity" ?
-                    <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  sensor.id === "AirQuality" ?
-                    <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  sensor.id === "WaterLevel" ?
-                  <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  sensor.id === "SoilMoisture" ? 
-                  <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  sensor.id === "GroundMovements" ?
-                  <ResponsiveContainer height={400} width="100%">
-                      <LineChart
-                        data={tempData}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 10,
-                          bottom: 5,
-                        }}
-                      >  
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  :
-                  " "
-                        
-                }
-              </Suspense>
+            <div key={sensor.id}>
+              {
+                sensor.id === "Temperature" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={tempData}
+                    lines={[["Temperature", "#05B5C6"]]}
+                  /> 
+                :
+                sensor.id === "Humidity" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={humData}
+                    lines={[["Humidity", "#05B5C6"]]}
+                  /> 
+                :
+                sensor.id === "AirQuality" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={airData}
+                    lines={[["Air PPM", "#05B5C6"]]}
+                    
+                  /> 
+                :
+                sensor.id === "GroundMovements" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={groundData}
+                    lines={[["Ground Movement", "#05B5C6"]]}
+                  /> 
+                :
+                sensor.id === "WaterLevel" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={waterData}
+                    lines={[["Water Level", "#05B5C6"]]}
+                  /> 
+                :
+                sensor.id === "SoilMoisture" ? 
+                  <RenderChart 
+                    sensorName={sensor.name}
+                    sensorData={soilData}
+                    lines={[["Soil Moisture", "#05B5C6"]]}
+                  /> 
+                : null
+              }
             </div>
           )
         )}
+      </div>
     </div>
   )
 }
