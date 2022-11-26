@@ -10,8 +10,8 @@ type sidebarProps = {
 }
 
 const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
-  const activeLink = "outline-none flex items-center gap-2 bg-slate-300 hover:bg-slate-300 dark:bg-main-dark-bg dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out"
-  const normalLink = "outline-none flex items-center gap-2 hover:bg-slate-300 dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out"
+  const activeLink = "outline-none flex items-center gap-2 bg-main-bg hover:bg-main-bg dark:bg-main-dark-bg dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out"
+  const normalLink = "outline-none flex items-center gap-2 hover:bg-main-bg dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out"
 
   return (
     <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2">

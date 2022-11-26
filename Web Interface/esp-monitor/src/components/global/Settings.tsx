@@ -10,7 +10,7 @@ const Settings:FC<settingProps> = ({menuFunc}) => {
   return (
     <ClickAwayListener onClickAway={() => {menuFunc('none')}}>
       <div className={`absolute mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-fit w-72 sm:-translate-x-[145px] -translate-x-[135px]
-      shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-scroll py-1`}>
+      shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-auto py-1`}>
         <div className="p-2 flex gap-10 items-center">
           <h2 className="w-full text-center font-bold -translate-x-7 text-sm dark:text-slate-400 text-slate-500">Settings</h2>
           <div className="w-full flex items-center">

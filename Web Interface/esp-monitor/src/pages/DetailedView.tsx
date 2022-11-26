@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense, useEffect, useState } from 'react'
+import { FC, lazy, useEffect, useState } from 'react'
 
 // Firebase
 import db from '../firebase';

@@ -81,14 +81,14 @@ function App() {
             <div className="flex relative bg-main-bg dark:bg-main-dark-bg dark:text-slate-200 text-main-dark-bg">
               {/* Sidebar  */}
               <div className={`${sidebarOpen ? "w-72 " : "w-0 overflow-hidden"} 
-              dark:bg-secondary-dark-bg bg-main-bg transition-all duration-150 ease-out`}>
+              dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-out`}>
                 <Sidebar sideIsOpen={sidebarOpen}/>
               </div>
               <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
                 <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                   {/* Mobile Sidebar */}
                   <div className={`${mobileNavOpen ? "h-screen z-[100]" : "h-0 overflow-hidden"}
-                  dark:bg-main-dark-bg bg-main-bg transition-all duration-150 ease-linear fixed`}>
+                  dark:bg-main-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
                       <MobileNavigation 
                         handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
                         mobileNavOpen

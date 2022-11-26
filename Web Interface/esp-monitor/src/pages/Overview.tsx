@@ -1,15 +1,14 @@
 import { FC, lazy, Suspense, useEffect, useState } from 'react'
 
 import { CircularProgress } from '@mui/material';
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const SimpleCard = lazy(() => import('../components/SimpleCard'));
-const Widget = lazy(() => import('../components/Widget'));
 const RenderChart = lazy(() => import( '../components/RenderChart'));
 
 // Firebase
 import db from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 
 type overviewProps = {
@@ -46,7 +45,7 @@ const Overview:FC<overviewProps> = ({}) => {
   }, [sensors[4]?.reading, sensors[2]?.reading])
 
   return (
-    <div className="mt-16 md:mt-12 flex flex-col gap-10 px-4 sm:pb-28">
+    <div className="mt-16 md:mt-12 flex flex-col gap-10 px-4 pb-28">
       {/* Cards */}
       <div className="flex flex-wrap justify-center gap-6">
         {/* TODO: Decide on notification severity categories, could use
@@ -72,14 +71,30 @@ const Overview:FC<overviewProps> = ({}) => {
 
       <div className="flex flex-wrap justify-center items-center gap-6 w-full h-fit">
         <div>
-          <RenderChart 
-            sensorName={"Temperature and Humidity"}
-            sensorData={[...tempHumData]}
-            lines={[
-              ["temperature", "#05B5C6"], 
-              ["humidity", "#4961E4"]
-            ]}
-          />
+          <div className="h-[530px] min-w-fit w-full sm:w-full lg:w-[1000px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
+          flex items-center justify-center flex-wrap">
+            <p className="mb-5 capitalize text-xl text-slate-700 dark:text-slate-400 text-center">temperature and humidity chart</p>
+            <ResponsiveContainer width="99%" height={400}>
+              <AreaChart
+                width={500}
+                height={400}
+                data={[...tempHumData]}
+                margin={{
+                  top: 10,
+                  right: 30,
+                  left: 0,
+                  bottom: 0,
+                }}
+              >
+                <XAxis />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Area type="monotone" dataKey="temperature" stackId="2" stroke="#8884d8" fill="#8884d8" />
+                <Area type="monotone" dataKey="humidity" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
         </div>
         
       </div>
