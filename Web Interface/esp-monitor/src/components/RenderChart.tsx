@@ -16,10 +16,10 @@ type chartProps = {
 const RenderChart:FC<chartProps> = ({sensorName="Generic Sensor", sensorData, lines, xKey, yKey}) => {
   return (
     <Suspense fallback={<CircularProgress />}>
-        <div className={`h-[530px] min-w-fit w-full lg:w-[700px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
+        <div className={`h-[530px] min-w-fit w-full sm:w-full lg:w-[800px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
         flex items-center justify-center flex-wrap`}>
         <p className="mb-5 capitalize text-xl text-slate-700 dark:text-slate-400">{sensorName} chart</p>
-            <ResponsiveContainer height={400} width="100%" >
+            <ResponsiveContainer height={400} width="99%" >
                 <LineChart
                     data={sensorData}
                     margin={{
@@ -35,7 +35,7 @@ const RenderChart:FC<chartProps> = ({sensorName="Generic Sensor", sensorData, li
                     <Legend />
                     {
                         lines.map((val: any) => (
-                            <Line type="monotone" dataKey={val[0]} stroke={val[1]}/>
+                            <Line key="val" type="monotone" dataKey={val[0]} stroke={val[1]}/>
                         ))
                     }
                     

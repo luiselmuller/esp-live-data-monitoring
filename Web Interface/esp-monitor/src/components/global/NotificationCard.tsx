@@ -10,8 +10,8 @@ type ntcProps = {
 const NotificationCard:FC<ntcProps> = ({message, time, id}) => {
 
   return (
-    <div className="w-full h-20 bg-main-bg dark:bg-gray-600 rounded-xl">
-        <div className="w-full h-5 flex text-xs px-2 mb-2 dark:text-gray-300  border-b border-black dark:border-slate-100">
+    <div className="w-full h-20 shadow-lg my-1 border-1 rounded-lg">
+        <div className="font-bold italic w-full h-5 flex text-xs px-2 mb-2 dark:text-gray-300  border-b border-black dark:border-slate-100">
             {id} Alert
         </div>
         <div className="w-full h-10 px-2">

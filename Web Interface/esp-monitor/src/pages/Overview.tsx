@@ -46,7 +46,7 @@ const Overview:FC<overviewProps> = ({}) => {
   }, [sensors[4]?.reading, sensors[2]?.reading])
 
   return (
-    <div className="mt-16 md:mt-12 flex flex-col gap-10 sm:px-4 sm:pb-28">
+    <div className="mt-16 md:mt-12 flex flex-col gap-10 px-4 sm:pb-28">
       {/* Cards */}
       <div className="flex flex-wrap justify-center gap-6">
         {/* TODO: Decide on notification severity categories, could use

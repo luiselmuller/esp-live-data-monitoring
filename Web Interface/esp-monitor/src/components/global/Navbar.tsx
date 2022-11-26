@@ -50,7 +50,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
   return (
     <div className={`flex justify-evenly items-center p-3 relative mx-3 z-[10000]`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
-          className={`outline-none hover:scale-110 transition-all duration-150 ease-in-out`}>
+          className={`outline-none hover:scale-110 transition-all duration-150 ease-in-out active:scale-100`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
         <div className={`flex gap-2 items-center sm:text-lg text-md lg:border border-secondary-dark-bg
@@ -65,7 +65,8 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
         <div className="flex gap-2 sm:gap-4">
           <Tooltip title="Theme">
             <button type="button" onClick={handleTheme}
-              className={`hover:scale-110 transition-all duration-200 ease-in-out outline-none active:rotate-180`}>
+              className={`hover:scale-110 transition-all duration-200 ease-in-out outline-none active:rotate-180
+              active:scale-95`}>
               {theme === "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
@@ -73,7 +74,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           {/* Notifications */}
           {!mobileNav && 
             <Tooltip title="Notifications"
-            className="outline-none hover:scale-110 transition-all duration-150 ease-in-out">
+            className="outline-none hover:scale-110 transition-all duration-150 ease-in-out active:scale-100">
               <button type="button" onClick={() => setClickedMenu('notifications')}>
                 <Badge badgeContent={notifications.length} color="info" overlap="circular">
                   {notifications.length > 0 ? <NotificationImportantIcon fontSize="large" /> : <NotificationsNoneIcon fontSize="large" />}
@@ -85,7 +86,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           {/* Settings */}
           {!mobileNav && 
             <Tooltip title="Settings"
-              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180">
+              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out hover:rotate-180 active:scale-100">
               <button type="button" onClick={() => setClickedMenu('settings')}>
                 <SettingsIcon fontSize="large" />
               </button>
@@ -95,7 +96,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
           {/* Profile */}
           {!mobileNav && 
             <Tooltip title="Profile"
-              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out">
+              className="outline-none hover:scale-110 transition-all duration-150 ease-in-out active:scale-100">
               <button type="button" onClick={() => setClickedMenu('account')}>
                 <AccountCircleIcon fontSize="large" />
               </button>

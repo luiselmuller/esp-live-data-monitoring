@@ -12,12 +12,18 @@ type notifProps = {
 
 const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
   // Could save some notifications in some structure and delete them when mark all as read
+
+  let currentDate = new Date();
+  let date = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "/" + currentDate.getFullYear(); 
+  let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();  
+  
+
   return (
     <ClickAwayListener onClickAway={() => {menuFunc('none')}}>
-      <div className={`absolute mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-96 w-[300px] sm:-translate-x-[210px] -translate-x-[142px]
-      shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-auto`}>
-        <div className="p-2 flex gap-10 items-center border-b-2 border-slate-100 border-opacity-30">
-          <h2 className="w-full text-center font-bold -translate-x-7 text-sm">Alerts</h2>
+      <div className={`absolute mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-fit max-h-96 w-[300px] sm:-translate-x-[210px] -translate-x-[142px]
+      shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-auto py-1`}>
+        <div className="p-2 flex gap-10 items-center">
+          <h2 className="w-full text-center font-bold -translate-x-7 text-sm dark:text-slate-400 text-slate-500">Alerts</h2>
           <div className="w-full flex items-center">
             <button type="button" className="outline-none text-xs flex items-center opacity-80 hover:opacity-100 transition-all duration-100 ease-in-out
             ">
