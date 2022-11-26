@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Tooltip from '@mui/material/Tooltip';
 
 type sidebarProps = {
   sideIsOpen: any,
@@ -16,7 +18,17 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
   return (
     <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2">
       {/* Header */}
-      <p className="text-xl flex justify-center py-4 font-semibold mb-4 border-b-1">Micro Dashboard</p>
+      <div className="flex justify-center items-center border-b-1 mb-4 py-4 gap-4">
+        <p className="text-xl font-semibold">Micro Dashboard</p>
+        <Tooltip title="Github repository">
+          <button type="button" className="active:scale-100 hover:scale-110 transition-all duration-100 ease-in-out
+          ">
+            <a href="https://github.com/luiselmuller/microcontroller-dashboard" target="_blank">
+              <GitHubIcon fontSize="large"/>
+            </a>
+          </button>
+        </Tooltip>
+      </div>
       {/* Items */}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">

@@ -12,6 +12,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import Notifications from './Notifications';
 import Settings from './Settings';
@@ -70,6 +71,16 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
               {theme === "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
+          {mobileNav &&
+            <Tooltip title="Github repository">
+              <button type="button" className="active:scale-100 hover:scale-110 transition-all duration-100 ease-in-out
+              ">
+                <a href="https://github.com/luiselmuller/microcontroller-dashboard" target="_blank">
+                  <GitHubIcon fontSize="large"/>
+                </a>
+              </button>
+            </Tooltip>
+          } 
           
           {/* Notifications */}
           {!mobileNav && 

@@ -10,7 +10,7 @@ const DeviceStatistics:FC<deviceProps> = ({deviceData}) => {
     <div className="mt-16 md:mt-5 px-7">
       <h2 className="text-2xl opacity-80 mb-5">Microcontroller</h2>
       {/* Temporary */}
-      <div className="flex flex-col gap-5 ">
+      <div className="flex flex-col gap-5">
         {Array.isArray(deviceData) && deviceData.map(
           (device: any) => (
             <div key={device.id}>

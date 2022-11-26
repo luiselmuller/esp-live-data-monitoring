@@ -110,9 +110,8 @@ const DetailedView:FC<detailedProps> = ({}) => {
 
 
   return (
-    <div className="gap-6 mt-16 w-full h-full flex justify-center flex-wrap items-center pb-36 px-2">
+    <div className="gap-6 mt-16 w-full h-full flex flex-col flex-wrap pb-36 sm:px-36 px-2">
       <div  className="flex items-center justify-center flex-wrap gap-6 w-full h-fit">
-      
         {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
             <div key={sensor.id}>
