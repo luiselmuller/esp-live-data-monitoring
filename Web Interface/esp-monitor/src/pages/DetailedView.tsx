@@ -8,11 +8,11 @@ const RenderChart = lazy(() => import('../components/RenderChart'));
 
 
 type detailedProps = {
-  chartData?: any,
+
 }
 
-// Temperature chart data
-let tempHumData: any[] = [];
+// chart data
+
 let tempData:    any[] = [];
 let humData:     any[] = [];
 let waterData:   any[] = [];
@@ -20,15 +20,15 @@ let groundData:  any[] = [];
 let airData:     any[] = [];
 let soilData:    any[] = [];
 
-const DetailedView:FC<detailedProps> = ({chartData}) => {
+const DetailedView:FC<detailedProps> = ({}) => {
   const chartDataLimit = 10;
   let currentDate = new Date();
   let date = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "/" + currentDate.getFullYear(); 
   let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();  
   
-  // TODO: try to get all the chart data individually
-
   const [sensors, setSensors]: any = useState({});
+
+  
 
   // Getting sensor readings
   useEffect(() => 
@@ -37,19 +37,6 @@ const DetailedView:FC<detailedProps> = ({chartData}) => {
         (snapshot) => 
         setSensors(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
     ), []);
-
-  // put in a for loop to get each update for each sensor and put it in the respective array
-  // Temperature data
-  useEffect(() => {
-    if(tempHumData.length <= chartDataLimit){
-      tempHumData.push(
-        {"temperature": sensors[4]?.reading, "humidity": sensors[2]?.reading} //sensors[4].reading
-      )
-    }
-    else{
-      tempHumData.shift();
-    }
-  }, [sensors[4]?.reading, sensors[2]?.reading])
 
   useEffect(() => {
     for(let i = 0; i < sensors.length; i++){
@@ -118,18 +105,14 @@ const DetailedView:FC<detailedProps> = ({chartData}) => {
 
       }
     }
-  }, [sensors])
+  }, [sensors[0]?.reading, sensors[1]?.reading, sensors[2]?.reading, 
+      sensors[3]?.reading, sensors[4]?.reading, sensors[5]?.reading])
 
 
   return (
     <div className="gap-6 mt-5 w-full h-full flex justify-center flex-wrap items-center pb-36 sm:px-5 px-2">
-      <RenderChart 
-        sensorName={"Temperature and Humidity"}
-        sensorData={tempHumData}
-        lines={[["temperature", "#05B5C6"], ["humidity", "#4961E4"]]}
-      />
-
       <div  className="flex items-center justify-center flex-wrap gap-6 w-full h-fit">
+      
         {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
             <div key={sensor.id}>
@@ -137,21 +120,21 @@ const DetailedView:FC<detailedProps> = ({chartData}) => {
                 sensor.id === "Temperature" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={tempData}
+                    sensorData={[...tempData]}
                     lines={[["Temperature", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "Humidity" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={humData}
+                    sensorData={[...humData]}
                     lines={[["Humidity", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "AirQuality" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={airData}
+                    sensorData={[...airData]}
                     lines={[["Air PPM", "#05B5C6"]]}
                     
                   /> 
@@ -159,21 +142,21 @@ const DetailedView:FC<detailedProps> = ({chartData}) => {
                 sensor.id === "GroundMovements" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={groundData}
+                    sensorData={[...groundData]}
                     lines={[["Ground Movement", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "WaterLevel" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={waterData}
+                    sensorData={[...waterData]}
                     lines={[["Water Level", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "SoilMoisture" ? 
                   <RenderChart 
                     sensorName={sensor.name}
-                    sensorData={soilData}
+                    sensorData={[...soilData]}
                     lines={[["Soil Moisture", "#05B5C6"]]}
                   /> 
                 : null
