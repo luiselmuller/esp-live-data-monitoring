@@ -33,7 +33,7 @@ type cardProps = {
 }
 
 const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=" ",
- bg="bg-slate-300 dark:bg-secondary-dark-bg", iconColor="dark:text-slate-200 text-main-dark-bg", iconBg="dark:bg-main-dark-bg bg-slate-100", data=0}) => {
+ bg="bg-slate-300 dark:bg-secondary-dark-bg", iconColor="dark:text-[#e4e5f1] text-main-dark-bg", iconBg="dark:bg-main-dark-bg bg-main-bg", data=0}) => {
   
   let tempType = "℉";
   
@@ -53,9 +53,9 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=
           }
         </div>
       </div>
-      <div className="ml-8">
+      <div className="ml-8 ">
         <p className="dark:text-slate-300 opacity-50 text-sm mb-2 capitalize">{title}</p>
-        <p className="text-2xl flex gap-2">
+        <p className="text-2xl flex gap-2 dark:text-[#e4e5f1]">
           {
             data
           }

@@ -4,7 +4,7 @@ import { FC, lazy, useEffect, useState } from 'react'
 import db from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
 
-const RenderChart = lazy(() => import('../components/RenderChart'));
+const RenderLineChart = lazy(() => import('../components/RenderLineChart'));
 
 
 type detailedProps = {
@@ -27,8 +27,6 @@ const DetailedView:FC<detailedProps> = ({}) => {
   let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();  
   
   const [sensors, setSensors]: any = useState({});
-
-  
 
   // Getting sensor readings
   useEffect(() => 
@@ -110,28 +108,28 @@ const DetailedView:FC<detailedProps> = ({}) => {
 
 
   return (
-    <div className="gap-6 mt-16 w-full h-full flex flex-col flex-wrap pb-36 sm:px-36 px-2">
+    <div className="gap-6 mt-16 w-full h-full flex flex-col flex-wrap pb-10 px-2 sm:px-5">
       <div  className="flex items-center justify-center flex-wrap gap-6 w-full h-fit">
         {Array.isArray(sensors) && sensors.map(
           (sensor: any) => (
             <div key={sensor.id}>
               {
                 sensor.id === "Temperature" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...tempData]}
                     lines={[["Temperature", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "Humidity" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...humData]}
                     lines={[["Humidity", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "AirQuality" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...airData]}
                     lines={[["Air PPM", "#05B5C6"]]}
@@ -139,26 +137,27 @@ const DetailedView:FC<detailedProps> = ({}) => {
                   /> 
                 :
                 sensor.id === "GroundMovements" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...groundData]}
                     lines={[["Ground Movement", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "WaterLevel" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...waterData]}
                     lines={[["Water Level", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "SoilMoisture" ? 
-                  <RenderChart 
+                  <RenderLineChart 
                     sensorName={sensor.name}
                     sensorData={[...soilData]}
                     lines={[["Soil Moisture", "#05B5C6"]]}
                   /> 
-                : null
+                : 
+                null
               }
             </div>
           )

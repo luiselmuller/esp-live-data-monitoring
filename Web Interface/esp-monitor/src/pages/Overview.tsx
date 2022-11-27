@@ -3,13 +3,11 @@ import { FC, lazy, Suspense, useEffect, useState } from 'react'
 import { CircularProgress } from '@mui/material';
 
 const SimpleCard = lazy(() => import('../components/SimpleCard'));
-const RenderChart = lazy(() => import( '../components/RenderChart'));
+const RenderAreaChart = lazy(() => import('../components/RenderAreaChart'))
 
 // Firebase
 import db from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
 
 type overviewProps = {
 
@@ -71,34 +69,13 @@ const Overview:FC<overviewProps> = ({}) => {
 
       <div className="flex flex-wrap justify-center items-center gap-6 w-full h-fit">
         <div>
-          <div className="h-[530px] min-w-fit w-full sm:w-full lg:w-[1000px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
-          flex items-center justify-center flex-wrap">
-            <p className="mb-5 capitalize text-xl text-slate-700 dark:text-slate-400 text-center">temperature and humidity chart</p>
-            <ResponsiveContainer width="99%" height={400}>
-              <AreaChart
-                width={500}
-                height={400}
-                data={[...tempHumData]}
-                margin={{
-                  top: 10,
-                  right: 30,
-                  left: 0,
-                  bottom: 0,
-                }}
-              >
-                <XAxis />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Area type="monotone" dataKey="temperature" stackId="2" stroke="#8884d8" fill="#8884d8" />
-                <Area type="monotone" dataKey="humidity" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          <RenderAreaChart 
+            sensorName={"Temperature and Humidity chart"}
+            sensorData={[...tempHumData]}
+            lines={[["Temperature", "#05B5C6"], ["Humidity", "#04C8AF"]]}
+          /> 
         </div>
-        
       </div>
-      
     </div>
   )
 }

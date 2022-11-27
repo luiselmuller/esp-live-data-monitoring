@@ -85,9 +85,9 @@ function App() {
                 <Sidebar sideIsOpen={sidebarOpen}/>
               </div>
               <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-                <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-                  {/* Mobile Sidebar */}
-                  <div className={`${mobileNavOpen ? "h-screen z-[100]" : "h-0 overflow-hidden"}
+                <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg z-[10000] w-full">
+                  {/* Mobile Navigation */}
+                  <div className={`${mobileNavOpen ? "h-screen " : "h-0 overflow-hidden"}
                   dark:bg-main-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
                       <MobileNavigation 
                         handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}

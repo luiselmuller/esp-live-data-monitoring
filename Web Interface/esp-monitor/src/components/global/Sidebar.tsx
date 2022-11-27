@@ -16,9 +16,9 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
   const normalLink = "outline-none flex items-center gap-2 hover:bg-main-bg dark:hover:bg-main-dark-bg px-2 py-4 rounded-lg text-lg transition-all duration-100 ease-in-out"
 
   return (
-    <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2">
+    <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2 dark:text-[#e4e5f1]">
       {/* Header */}
-      <div className="flex justify-center items-center border-b-1 mb-4 py-4 gap-4">
+      <div className="flex justify-center items-center border-b-1 border-slate-900 mb-4 py-4 gap-4">
         <p className="text-xl font-semibold">Micro Dashboard</p>
         <Tooltip title="Github repository">
           <button type="button" className="active:scale-100 hover:scale-110 transition-all duration-100 ease-in-out
@@ -33,7 +33,7 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           {/* Section title */}
-          <p className="ml-2 opacity-50">Data</p>
+          <p className="ml-2 dark:opacity-50 opacity-90">Data</p>
           {/* Temporary */}
           <NavLink to="/" 
           className={({ isActive }) => isActive ? activeLink : normalLink}
@@ -52,7 +52,7 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
 
         <div className="flex flex-col gap-2">
           {/* Section title */}
-          <p className="ml-2 opacity-50">Device</p>
+          <p className="ml-2 dark:opacity-50 opacity-90">Device</p>
           {/* Temporary */}
           <NavLink to="/device-statistics"
           className={({ isActive }) => isActive ? activeLink : normalLink}

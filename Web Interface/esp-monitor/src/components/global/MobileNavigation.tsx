@@ -21,7 +21,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               {/* Section title */}
-              <p className="ml-2 opacity-50">Data</p>
+              <p className="ml-2 dark:opacity-50 opacity-90">Data</p>
               {/* Temporary */}
               <NavLink to="/" onClick={handleMobileNavOpen}
               className={navStyle}>
@@ -38,7 +38,7 @@ const MobileNavigation:FC<mobileNavProps> = ({handleMobileNavOpen, mobileNavOpen
 
             <div className="flex flex-col gap-2">
               {/* Section title */}
-              <p className="ml-2 opacity-50">Device</p>
+              <p className="ml-2 dark:opacity-50 opacity-90">Device</p>
               {/* Temporary */}
               <NavLink to="/device-statistics" onClick={handleMobileNavOpen}
               className={navStyle}>
