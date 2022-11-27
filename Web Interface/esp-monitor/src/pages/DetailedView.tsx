@@ -5,7 +5,7 @@ import db from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
 
 const RenderLineChart = lazy(() => import('../components/RenderLineChart'));
-
+const RenderAreaChart = lazy(() => import('../components/RenderAreaChart'))
 
 type detailedProps = {
 
@@ -144,7 +144,7 @@ const DetailedView:FC<detailedProps> = ({}) => {
                   /> 
                 :
                 sensor.id === "WaterLevel" ? 
-                  <RenderLineChart 
+                  <RenderAreaChart 
                     sensorName={sensor.name}
                     sensorData={[...waterData]}
                     lines={[["Water Level", "#05B5C6"]]}

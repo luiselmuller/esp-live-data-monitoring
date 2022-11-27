@@ -18,7 +18,7 @@ const Sidebar:FC<sidebarProps> = ({sideIsOpen}) => {
   return (
     <div className="h-screen w-72 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 px-2 dark:text-[#e4e5f1]">
       {/* Header */}
-      <div className="flex justify-center items-center border-b-1 border-slate-900 mb-4 py-4 gap-4">
+      <div className="flex justify-center items-center border-b-1 dark:border-slate-300 border-slate-900 mb-4 py-4 gap-4">
         <p className="text-xl font-semibold">Micro Dashboard</p>
         <Tooltip title="Github repository">
           <button type="button" className="active:scale-100 hover:scale-110 transition-all duration-100 ease-in-out
