@@ -98,16 +98,9 @@ function App() {
                 <Sidebar sideIsOpen={sidebarOpen}/>
               </div>
               <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-                {/* Navigation */}
-                <div className="fixed bg-main-bg dark:bg-main-dark-bg w-full z-[10000]">
-                  {/* Mobile Navigation */}
-                  <div className={`${mobileNavOpen ? "h-screen" : "h-0 overflow-hidden"}
-                  dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
-                      <MobileNavigation 
-                        handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
-                        mobileNavOpen
-                      />
-                  </div>
+                <div className={`fixed md:static  z-[100000] w-full transition-all duration-50 ease-linear
+                ${mobileNavOpen ? "dark:bg-secondary-dark-bg bg-slate-300" : "bg-main-bg dark:bg-main-dark-bg"}`}>
+                  
                   {/* Navbar */}
                   <Navbar 
                     customFuncOne={() => setSidebarOpen(!sidebarOpen)}
@@ -119,6 +112,14 @@ function App() {
                     setClickedMenu={handleClickedMenu}
                     handleTheme={handleThemeSwitch}
                     theme={theme}
+                  />
+                </div>
+                {/* Mobile Navigation */}
+                <div className={`${mobileNavOpen ? "h-screen z-[10000]" : "h-0 overflow-hidden"}
+                  dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
+                  <MobileNavigation 
+                    handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
+                    mobileNavOpen
                   />
                 </div>
 
