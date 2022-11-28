@@ -1,3 +1,13 @@
+/**
+ * @file Temperature.cpp
+ * @author Luisel Muller
+ * @brief 
+ * @version 0.1
+ * @date 2022-11-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "Temperature.h"
 
 Temperature::Temperature(int pin){
@@ -9,16 +19,6 @@ Temperature::Temperature(int pin){
 float Temperature::getData(){
   return currentTemp;
 }
-//
-//bool Temperature::declareEmergency(){
-//  if(currentTemp < 21 || currentTemp > 33){
-//    this->setEmergency(true);
-//    return true;
-//  }
-//  else this->setEmergency(false);
-//  return false;
-//}
-
 
 void Temperature::setTemperature(int temp){
   currentTemp = temp;

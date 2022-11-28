@@ -33,7 +33,7 @@ const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
           </div>
         </div>
         <div className="flex flex-col justify-evenly gap-1 py-1 px-1">
-          {Array.isArray(notifs) && notifs.map(
+          {Array.isArray(notifs) ? notifs.map(
             (alert:any) => (
               <div key={alert.id}>
                 <Suspense  fallback={<CircularProgress />}>
@@ -45,7 +45,10 @@ const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
                 </Suspense>
               </div>
             )
-          )}
+          )
+          :
+          <p className="my-5 text-center font-bold text-xl opacity-80 dark:text-slate-400 text-slate-500">No alerts</p>
+        }
           
         </div>
       </div>

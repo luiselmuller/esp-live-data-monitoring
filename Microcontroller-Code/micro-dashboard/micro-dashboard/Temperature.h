@@ -1,12 +1,12 @@
 #ifndef Temperature_h
 #define Temperature_h
 
-#include "Arduino.h"
+#include "Sensor.h"
 #include <DallasTemperature.h>
 #include <OneWire.h>
 #include <NonBlockingDallas.h>
 
-class Temperature{
+class Temperature: Sensor("Temperature reaching dangerous range"){
   public:
     Temperature(int pin);
     float getData();
