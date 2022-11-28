@@ -46,9 +46,9 @@ const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
               </div>
             )
           )
-          :
-          <p className="my-5 text-center font-bold text-xl opacity-80 dark:text-slate-400 text-slate-500">No alerts</p>
+          : " "
         }
+        {notifs.length === 0 && <p className="my-5 text-center font-bold text-xl opacity-80 dark:text-slate-400 text-slate-500">No alerts</p>}
           
         </div>
       </div>

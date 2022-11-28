@@ -3,7 +3,7 @@
 
 class Sensor {
   public:
-    Sensor(String n){notification = n}
+    Sensor(String n){notification = n};
     float getData();
     void setData();
     bool getSensorState();

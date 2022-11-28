@@ -10,7 +10,6 @@ class Temperature: Sensor("Temperature reaching dangerous range"){
   public:
     Temperature(int pin);
     float getData();
-    //bool danger();
     void setTemperature(int temp);
     DallasTemperature* getSensor();
 

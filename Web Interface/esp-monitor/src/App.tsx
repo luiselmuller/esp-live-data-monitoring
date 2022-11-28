@@ -14,7 +14,7 @@ const MobileNavigation = lazy(() => import('./components/global/MobileNavigation
 
 // Firebase
 import db from './firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   const [mobileNavDisabled, setMobileNavDisabled] = useState(true);
   const [clickedMenu, handleClickedMenu] = useState('none');
 
-  const [devices, setDevices] = useState({});
+  const [devices, setDevices]: any = useState({});
 
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
 
@@ -74,20 +74,34 @@ function App() {
     
   }, [screenSize, setSidebarOpen])
 
+  // Getting the microcontroller status by itself
+  const [microStatus, setMicroStatus] = useState(false);
+  useEffect(() => {
+    
+  })
+  const handleDeviceStatus = async () => {
+    const docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+
+    const uptimeStr: any = docUptime.data();
+
+  }
+
+
   return (
     <Suspense fallback={<LoadingScreen />}>
         <div className="">
           <Router>
             <div className="flex relative bg-main-bg dark:bg-main-dark-bg dark:text-slate-200 text-main-dark-bg">
               {/* Sidebar  */}
-              <div className={`${sidebarOpen ? "w-72 " : "w-0 overflow-hidden"} 
+              <div className={`${sidebarOpen ? "w-72  relative" : "w-0 overflow-hidden"} 
               dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-out`}>
                 <Sidebar sideIsOpen={sidebarOpen}/>
               </div>
               <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-                <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg z-[10000] w-full">
+                {/* Navigation */}
+                <div className="fixed bg-main-bg dark:bg-main-dark-bg w-full z-[10000]">
                   {/* Mobile Navigation */}
-                  <div className={`${mobileNavOpen ? "h-screen z-[10000]" : "h-0 overflow-hidden"}
+                  <div className={`${mobileNavOpen ? "h-screen" : "h-0 overflow-hidden"}
                   dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
                       <MobileNavigation 
                         handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
@@ -100,7 +114,7 @@ function App() {
                     customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
                     disabledSide={sidebarDisabled}
                     mobileNav={mobileNavOpen}
-                    microStatus={false}
+                    microStatus={microStatus}
                     clickedMenu={clickedMenu}
                     setClickedMenu={handleClickedMenu}
                     handleTheme={handleThemeSwitch}

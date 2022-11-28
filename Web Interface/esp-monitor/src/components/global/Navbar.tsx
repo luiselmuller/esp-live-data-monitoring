@@ -49,15 +49,15 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
     ), []);
 
   return (
-    <div className={`flex justify-evenly items-center p-3 relative mx-3 z-[1000000000] dark:text-[#e4e5f1]`}>
+    <div className={`flex justify-evenly items-center p-3 relative mx-3 dark:text-[#e4e5f1]`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
           className={`outline-none hover:scale-110 transition-all duration-150 ease-in-out active:scale-100`}>
           {mobileNav ? <CancelOutlined fontSize="large" /> : <MenuIcon fontSize="large" />}
         </button>
         <div className={`flex gap-2 items-center sm:text-lg text-md lg:border dark:border-slate-300 border-slate-900
         rounded-full py-1 px-4 ml-5`}>
-          <div className={`${microStatus[0] ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
-          {!disabledSide && <p>{microStatus[0] ? "Online" : "Offline"}</p>} 
+          <div className={`${microStatus ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
+          {!disabledSide && <p>{microStatus ? "Online" : "Offline"}</p>} 
         </div>
 
         <div className="w-full"></div>

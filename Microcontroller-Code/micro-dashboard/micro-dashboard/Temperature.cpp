@@ -17,13 +17,17 @@ Temperature::Temperature(int pin){
 
 
 float Temperature::getData(){
+  if(currentTemp > 110 || currentTemp < 40)
+    setSensorState(true);
+  else
+    setSensorState(false);
+  
   return currentTemp;
 }
 
 void Temperature::setTemperature(int temp){
   currentTemp = temp;
 }
-
 
 DallasTemperature* Temperature::getSensor(){
   return &dallasSensor;
