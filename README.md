@@ -13,6 +13,7 @@ For now you can [view the live site](https://microdashboard.netlify.app/).
 - TailwindCSS
 - Vite
 - Firestore
+
 [![](https://skills.thijs.gg/icons?i=react,ts,tailwindcss,vite,firebase&theme=dark)](https://skillicons.dev/) 
 
 
