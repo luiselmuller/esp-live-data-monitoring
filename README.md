@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Micro Dashboard
 
@@ -19,5 +20,6 @@ For now you can [view the live site](https://microdashboard.netlify.app/).
 
 ## Future of the project
 For now this will continue being a personal project but, I Might do more with this project in the future and expand it after redesigning some things and considering what direction to take it in.
+
 
 
