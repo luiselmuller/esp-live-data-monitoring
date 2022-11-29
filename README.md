@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Micro Dashboard
 
 This is a microcontroller dashboard built as a final project for an university class. It was made with react and uses firebase to communicate between the front end and microcontroller.
