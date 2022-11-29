@@ -70,7 +70,7 @@ const Overview:FC<overviewProps> = ({}) => {
       <div className="flex flex-wrap justify-center items-center gap-6 w-full h-fit">
         <div>
           <RenderAreaChart 
-            sensorName={"Temperature and Humidity chart"}
+            sensorName={"Temperature and Humidity"}
             sensorData={[...tempHumData]}
             lines={[["Temperature", "#05B5C6"], ["Humidity", "#04C8AF"]]}
           /> 

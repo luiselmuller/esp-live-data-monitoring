@@ -16,6 +16,10 @@ const MobileNavigation = lazy(() => import('./components/global/MobileNavigation
 import db from './firebase';
 import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
 
+let docUptimeOne: any = 0;
+let docUptimeTwo: any = 0;
+let prevUptime: any = 0;
+let newUptime: any = 0;
 
 function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -75,68 +79,91 @@ function App() {
   }, [screenSize, setSidebarOpen])
 
   // Getting the microcontroller status by itself
+  
   const [microStatus, setMicroStatus] = useState(false);
   useEffect(() => {
+    handleDeviceStatus();
+    checkDeviceStatus() 
+
+    setTimeout(() => {
+      if(newUptime > prevUptime)
+        setMicroStatus(true)
+      else
+        setMicroStatus(false)
+    }, 5000)
+
     
-  })
+  }, [devices[6]?.info])
   const handleDeviceStatus = async () => {
-    const docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+    setTimeout(async () => {
+      docUptimeOne = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
 
-    const uptimeStr: any = docUptime.data();
+      prevUptime = docUptimeOne.data();
+      console.log("prev",prevUptime)
+    }, 5000)
 
+  }
+
+  const checkDeviceStatus = async () => {
+    docUptimeTwo = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+
+    newUptime = docUptimeTwo.data();
+    console.log("new",newUptime)
   }
 
 
   return (
-    <Suspense fallback={<LoadingScreen />}>
-        <div className="">
-          <Router>
-            <div className="flex relative bg-main-bg dark:bg-main-dark-bg dark:text-slate-200 text-main-dark-bg">
-              {/* Sidebar  */}
-              <div className={`${sidebarOpen ? "w-72  relative" : "w-0 overflow-hidden"} 
-              dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-out`}>
-                <Sidebar sideIsOpen={sidebarOpen}/>
+    
+    <div className="">
+      <Suspense fallback={<LoadingScreen />}>
+        <Router>
+          <div className="flex relative bg-main-bg dark:bg-main-dark-bg dark:text-slate-200 text-main-dark-bg">
+            {/* Sidebar  */}
+            <div className={`${sidebarOpen ? "w-72  relative" : "w-0 overflow-hidden"} 
+            dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-out`}>
+              <Sidebar sideIsOpen={sidebarOpen}/>
+            </div>
+            <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
+              <div className={`fixed md:static  z-[100000] w-full transition-all duration-50 ease-linear
+              ${mobileNavOpen ? "dark:bg-secondary-dark-bg bg-slate-300" : "bg-main-bg dark:bg-main-dark-bg"}`}>
+                
+                {/* Navbar */}
+                <Navbar 
+                  customFuncOne={() => setSidebarOpen(!sidebarOpen)}
+                  customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
+                  disabledSide={sidebarDisabled}
+                  mobileNav={mobileNavOpen}
+                  microStatus={microStatus}
+                  clickedMenu={clickedMenu}
+                  setClickedMenu={handleClickedMenu}
+                  handleTheme={handleThemeSwitch}
+                  theme={theme}
+                />
               </div>
-              <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-                <div className={`fixed md:static  z-[100000] w-full transition-all duration-50 ease-linear
-                ${mobileNavOpen ? "dark:bg-secondary-dark-bg bg-slate-300" : "bg-main-bg dark:bg-main-dark-bg"}`}>
-                  
-                  {/* Navbar */}
-                  <Navbar 
-                    customFuncOne={() => setSidebarOpen(!sidebarOpen)}
-                    customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
-                    disabledSide={sidebarDisabled}
-                    mobileNav={mobileNavOpen}
-                    microStatus={microStatus}
-                    clickedMenu={clickedMenu}
-                    setClickedMenu={handleClickedMenu}
-                    handleTheme={handleThemeSwitch}
-                    theme={theme}
-                  />
-                </div>
-                {/* Mobile Navigation */}
-                <div className={`${mobileNavOpen ? "h-screen z-[10000]" : "h-0 overflow-hidden"}
-                  dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
-                  <MobileNavigation 
-                    handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
-                    mobileNavOpen
-                  />
-                </div>
+              {/* Mobile Navigation */}
+              <div className={`${mobileNavOpen ? "h-screen z-[10000]" : "h-0 overflow-hidden"}
+                dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
+                <MobileNavigation 
+                  handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}
+                  mobileNavOpen
+                />
+              </div>
 
-                {/* Routes */}
-                <div>
-                  <Routes>
-                    <Route path="/" element={<Overview  />} />
-                    <Route path="/overview" element={<Overview  />} />
-                    <Route path="/detailed-view" element={<DetailedView />} />
-                    <Route path="/device-statistics" element={<DeviceStatistics deviceData={devices}/>} />
-                  </Routes>
-                </div>
+              {/* Routes */}
+              <div>
+                <Routes>
+                  <Route path="/" element={<Overview  />} />
+                  <Route path="/overview" element={<Overview  />} />
+                  <Route path="/detailed-view" element={<DetailedView />} />
+                  <Route path="/device-statistics" element={<DeviceStatistics deviceData={devices}/>} />
+                </Routes>
               </div>
             </div>
-          </Router>
-        </div>
-    </Suspense>
+          </div>
+        </Router>
+      </Suspense>
+    </div>
+    
   )
 }
 
