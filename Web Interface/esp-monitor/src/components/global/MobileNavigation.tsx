@@ -1,9 +1,9 @@
-import { FC } from 'react'
+import { FC, lazy } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+const MonitorHeartIcon = lazy(() => import('@mui/icons-material/MonitorHeart'))
+const CalendarViewMonthIcon = lazy(() => import('@mui/icons-material/CalendarViewMonth'))
+const GridViewOutlinedIcon = lazy(() => import('@mui/icons-material/GridViewOutlined'))
 
 
 type mobileNavProps = {

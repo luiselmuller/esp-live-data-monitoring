@@ -1,18 +1,18 @@
 import { FC, lazy, useEffect, useState } from 'react'
 
 // Icon imports
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+const MenuIcon = lazy(() => import('@mui/icons-material/Menu'))
+const AccountCircleIcon = lazy(() => import('@mui/icons-material/AccountCircle'))
+const SettingsIcon = lazy(() => import('@mui/icons-material/Settings'))
+const NotificationsNoneIcon = lazy(() => import('@mui/icons-material/NotificationsNone'))
+const NotificationImportantIcon = lazy(() => import('@mui/icons-material/NotificationImportant'))
+const DarkModeIcon = lazy(() => import('@mui/icons-material/DarkMode'))
+const LightModeIcon = lazy(() => import('@mui/icons-material/LightMode'))
+const CancelOutlined = lazy(() => import('@mui/icons-material/CancelOutlined'))
+const GitHubIcon = lazy(() => import('@mui/icons-material/GitHub'))
 
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
-import CancelOutlined from '@mui/icons-material/CancelOutlined';
-import GitHubIcon from '@mui/icons-material/GitHub';
 
 import Notifications from './Notifications';
 import Settings from './Settings';
