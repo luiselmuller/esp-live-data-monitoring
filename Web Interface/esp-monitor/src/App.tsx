@@ -12,14 +12,23 @@ const DeviceStatistics = lazy(() => import('./pages/DeviceStatistics'))
 const Sidebar = lazy(() => import('./components/global/Sidebar'))
 const MobileNavigation = lazy(() => import('./components/global/MobileNavigation'))
 
+// Dropdowns
+import Notifications from './components/global/Notifications';
+import Settings from './components/global/Settings';
+import Account from './components/global/Account';
+
 // Firebase
 import db from './firebase';
-import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot, doc, getDoc, updateDoc } from 'firebase/firestore';
 
-let docUptimeOne: any = 0;
-let docUptimeTwo: any = 0;
-let prevUptime: any = 0;
-let newUptime: any = 0;
+// Animations
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+// Variables to check device status
+let docUptime: any;
+let newUptime: any;
+let uptime: number = 0;
+let updatedTime: number = 0;
 
 function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -79,38 +88,57 @@ function App() {
   }, [screenSize, setSidebarOpen])
 
   // Getting the microcontroller status by itself
-  
-  const [microStatus, setMicroStatus] = useState(false);
+  const [microStatus, setMicroStatus] = useState({info: false});
   useEffect(() => {
-    handleDeviceStatus();
-    checkDeviceStatus() 
-
-    setTimeout(() => {
-      if(newUptime > prevUptime)
-        setMicroStatus(true)
-      else
-        setMicroStatus(false)
-    }, 5000)
-
-    
+    getUptime();
+    checkStatus();
   }, [devices[6]?.info])
-  const handleDeviceStatus = async () => {
+
+  const getUptime = async () => {
+    docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+
+    uptime = docUptime.data();
+    console.log("uptime",uptime)
+  }
+
+  const checkStatus = () => {
     setTimeout(async () => {
-      docUptimeOne = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+      newUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
 
-      prevUptime = docUptimeOne.data();
-      console.log("prev",prevUptime)
-    }, 5000)
+      updatedTime = newUptime.data();
+      if(uptime > updatedTime)
+        setMicroStatus({info: true})
+      else
+        setMicroStatus({info: false})
+      console.log("Checked Status", microStatus)
+    }, 16000)
 
+    console.log("new uptime",updatedTime)
   }
 
-  const checkDeviceStatus = async () => {
-    docUptimeTwo = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+  // Update the status on firebase
+  useEffect(() => {
+    handleStatusUpdate();
+  }, [microStatus])
 
-    newUptime = docUptimeTwo.data();
-    console.log("new",newUptime)
+  const handleStatusUpdate = async () => {
+    await updateDoc(doc(db, "DeviceStatistics/Status"), microStatus);
   }
 
+  // Notifications
+  const [notifications, setNotifications] = useState([{}]);
+
+  // Getting notifications
+  useEffect(() => 
+    onSnapshot(
+    (collection(db,"Notifications")), 
+        (snapshot) => 
+        setNotifications(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    ), []);
+
+
+  // Animations
+  const [dropdownRef] = useAutoAnimate<HTMLDivElement>();
 
   return (
     
@@ -124,7 +152,7 @@ function App() {
               <Sidebar sideIsOpen={sidebarOpen}/>
             </div>
             <div className={`min-h-screen w-full ${false} ? 'md:ml-72' : ' flex-2'`}>
-              <div className={`fixed md:static  z-[100000] w-full transition-all duration-50 ease-linear
+              <div className={`fixed md:static  z-[1000000] w-full transition-all duration-50 ease-linear
               ${mobileNavOpen ? "dark:bg-secondary-dark-bg bg-slate-300" : "bg-main-bg dark:bg-main-dark-bg"}`}>
                 
                 {/* Navbar */}
@@ -134,14 +162,24 @@ function App() {
                   disabledSide={sidebarDisabled}
                   mobileNav={mobileNavOpen}
                   microStatus={microStatus}
-                  clickedMenu={clickedMenu}
+                  notifications={notifications}
                   setClickedMenu={handleClickedMenu}
                   handleTheme={handleThemeSwitch}
                   theme={theme}
                 />
+
+                {/* Dropdowns */}
+                <div className="bg-black w-full h-96 absolute" ref={dropdownRef}>
+                  {/* Logic for the dropdown menus */}
+                  {!mobileNavDisabled && 
+                    clickedMenu === "notifications" ? <Notifications menuFunc={handleClickedMenu} notifs={notifications}/> :
+                    clickedMenu === "settings" ? <Settings menuFunc={handleClickedMenu}/> :
+                    clickedMenu === "account" ? <Account menuFunc={handleClickedMenu}/> :" "
+                  }
+                </div>
               </div>
               {/* Mobile Navigation */}
-              <div className={`${mobileNavOpen ? "h-screen z-[10000]" : "h-0 overflow-hidden"}
+              <div className={`${mobileNavOpen ? "h-screen z-[100000]" : "h-0 overflow-hidden"}
                 dark:bg-secondary-dark-bg bg-slate-300 transition-all duration-150 ease-linear fixed`}>
                 <MobileNavigation 
                   handleMobileNavOpen={() => setMobileNavOpen(!mobileNavOpen)}

@@ -6,6 +6,8 @@ import { collection, onSnapshot } from 'firebase/firestore';
 
 const RenderLineChart = lazy(() => import('../components/RenderLineChart'));
 const RenderAreaChart = lazy(() => import('../components/RenderAreaChart'))
+const RenderBarChart = lazy(() => import('../components/RenderBarChart'))
+
 
 type detailedProps = {
 
@@ -22,10 +24,7 @@ let soilData:    any[] = [];
 
 const DetailedView:FC<detailedProps> = ({}) => {
   const chartDataLimit = 10;
-  let currentDate = new Date();
-  let date = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "/" + currentDate.getFullYear(); 
-  let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();  
-  
+
   const [sensors, setSensors]: any = useState({});
 
   // Getting sensor readings
@@ -129,7 +128,7 @@ const DetailedView:FC<detailedProps> = ({}) => {
                   /> 
                 :
                 sensor.id === "AirQuality" ? 
-                  <RenderLineChart 
+                  <RenderBarChart 
                     sensorName={sensor.name}
                     sensorData={[...airData]}
                     lines={[["Air PPM", "#05B5C6"]]}
@@ -147,7 +146,7 @@ const DetailedView:FC<detailedProps> = ({}) => {
                   <RenderAreaChart 
                     sensorName={sensor.name}
                     sensorData={[...waterData]}
-                    lines={[["Water Level", "#05B5C6"]]}
+                    lines={[["Water Level", "#05B5C6", "#05B5C6"]]}
                   /> 
                 :
                 sensor.id === "SoilMoisture" ? 

@@ -17,9 +17,9 @@ const DeviceStatistics:FC<deviceProps> = ({deviceData}) => {
               <div className="flex w-full bg-slate-300 dark:bg-secondary-dark-bg p-7 rounded-xl">
                 <p className="flex w-full">{device.id}</p>
                 <p className="flex w-full">{
-                  device.id === "Uptime" ? (
+                  device.id === "Status" ? (
                     // TODO: change millis to human readable time
-                    device.info
+                    device.info === true ? "Online" : "Offline"
                   ) :
                   device.info
 

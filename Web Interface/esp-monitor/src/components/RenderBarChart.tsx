@@ -1,6 +1,6 @@
 import React, { FC, Suspense } from 'react'
 
-import { XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { CircularProgress } from '@mui/material';
 
 type chartProps = {
@@ -13,14 +13,14 @@ type chartProps = {
     height?: any,
 }
 
-const RenderAreaChart:FC<chartProps> = ({sensorName="Generic Sensor", sensorData, lines, xKey, yKey}) => {
+const RenderBarChart:FC<chartProps> = ({sensorName="Generic Sensor", sensorData, lines, xKey, yKey}) => {
   return (
     <Suspense fallback={<CircularProgress />}>
-        <div className={`h-[530px] min-w-fit w-full max-w-[800px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
+        <div className={`h-[530px] min-w-fit max-w-[800px] rounded-xl bg-slate-300 dark:bg-secondary-dark-bg p-10
         flex items-center justify-center flex-wrap`}>
         <p className="mb-5 capitalize text-xl text-slate-700 dark:text-slate-400">{sensorName} chart</p>
             <ResponsiveContainer height={400} width="99%" >
-                <AreaChart
+                <BarChart
                     data={sensorData}
                     margin={{
                     top: 5,
@@ -35,15 +35,15 @@ const RenderAreaChart:FC<chartProps> = ({sensorName="Generic Sensor", sensorData
                     <Legend />
                     {
                         lines.map((val: any) => (
-                            <Area key={val} type="monotone" dataKey={val[0]}  stroke={val[2]} fill={val[1]} />
+                            <Bar key="val" dataKey={val[0]} fill={val[1]}/>
                         ))
                     }
                     
-                </AreaChart>
+                </BarChart>
             </ResponsiveContainer>
         </div>
     </Suspense>
   )
 }
 
-export default RenderAreaChart
+export default RenderBarChart

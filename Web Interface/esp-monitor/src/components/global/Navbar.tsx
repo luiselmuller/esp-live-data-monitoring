@@ -14,15 +14,6 @@ const GitHubIcon = lazy(() => import('@mui/icons-material/GitHub'))
 import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 
-import Notifications from './Notifications';
-import Settings from './Settings';
-import Account from './Account';
-
-// Firebase
-import db from '../../firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
-
-
 
 type navProps = {
   customFuncOne?: any,
@@ -30,24 +21,15 @@ type navProps = {
   mobileNav?: any,
   customFuncTwo?: any,
   microStatus?: any,
-  clickedMenu?: any,
   setClickedMenu?: any,
   handleTheme?: any,
-  theme? : any
+  theme?: any,
+  notifications?: any,
 }
 
-const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus, clickedMenu, setClickedMenu,
-  handleTheme, theme}) => {
-  const [notifications, setNotifications] = useState([{}]);
-
-  // Getting notifications
-  useEffect(() => 
-    onSnapshot(
-    (collection(db,"Notifications")), 
-        (snapshot) => 
-        setNotifications(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
-    ), []);
-
+const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileNav, microStatus, setClickedMenu,
+  handleTheme, theme, notifications}) => {
+  
   return (
     <div className={`flex justify-evenly items-center p-3 relative mx-3 dark:text-[#e4e5f1]`}>
         <button type="button" onClick={!disabledSide ? customFuncOne : customFuncTwo}
@@ -56,8 +38,8 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
         </button>
         <div className={`flex gap-2 items-center sm:text-lg text-md lg:border dark:border-slate-300 border-slate-900
         rounded-full py-1 px-4 ml-5`}>
-          <div className={`${microStatus ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
-          {!disabledSide && <p>{microStatus ? "Online" : "Offline"}</p>} 
+          <div className={`${microStatus.info === true ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
+          {!disabledSide && <p>{microStatus.info === true ? "Online" : "Offline"}</p>} 
         </div>
 
         <div className="w-full"></div>
@@ -112,13 +94,6 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
                 <AccountCircleIcon fontSize="large" />
               </button>
             </Tooltip>
-          }
-
-          {/* Logic for the dropdown menus */}
-          {!mobileNav && 
-            clickedMenu === "notifications" ? <Notifications menuFunc={setClickedMenu} notifs={notifications}/> :
-            clickedMenu === "settings" ? <Settings menuFunc={setClickedMenu}/> :
-            clickedMenu === "account" ? <Account menuFunc={setClickedMenu}/> :" "
           }
         </div>
     </div>
