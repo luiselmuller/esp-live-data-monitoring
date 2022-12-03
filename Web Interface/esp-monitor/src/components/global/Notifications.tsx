@@ -20,7 +20,7 @@ const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
 
   return (
     <ClickAwayListener onClickAway={() => {menuFunc('none')}}>
-      <div className={`z-[1000] absolute mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-fit max-h-96 w-[300px]
+      <div className={`z-[1000] fixed mt-12 bg-slate-300 dark:bg-secondary-dark-bg h-fit max-h-96 w-[300px] sm:-translate-x-[125px] -translate-x-[25px] -translate-y-[40px]
       shadow-xl rounded-xl border-2 border-slate-100 border-opacity-30 overflow-auto py-1`}>
         <div className="p-2 flex gap-10 items-center">
           <h2 className="w-full text-center font-bold -translate-x-7 text-sm dark:text-slate-400 text-slate-500">Alerts</h2>

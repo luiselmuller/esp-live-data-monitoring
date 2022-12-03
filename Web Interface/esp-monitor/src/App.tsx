@@ -169,9 +169,9 @@ function App() {
                 />
 
                 {/* Dropdowns */}
-                <div className="bg-black w-full h-96 absolute" ref={dropdownRef}>
+                <div className="w-full relative flex justify-end" ref={dropdownRef}>
                   {/* Logic for the dropdown menus */}
-                  {!mobileNavDisabled && 
+                  {!mobileNavOpen && 
                     clickedMenu === "notifications" ? <Notifications menuFunc={handleClickedMenu} notifs={notifications}/> :
                     clickedMenu === "settings" ? <Settings menuFunc={handleClickedMenu}/> :
                     clickedMenu === "account" ? <Account menuFunc={handleClickedMenu}/> :" "
