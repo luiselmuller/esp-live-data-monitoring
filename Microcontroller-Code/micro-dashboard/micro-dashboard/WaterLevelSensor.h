@@ -7,14 +7,15 @@
 class WaterLevelSensor  : public Sensor{
   public:
     WaterLevelSensor(int pin1, int pin2);
-    float getData();
+    int getData();
     void setData();
     String getID();
     
   private:
     int trs;
     int ech;
-    float waterLevel = 0.0;
+    float waterLevel = 0;
+    String sensorID = "WaterLevel";
   
 };
 
