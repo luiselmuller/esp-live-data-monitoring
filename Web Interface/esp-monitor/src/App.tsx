@@ -87,34 +87,33 @@ function App() {
     
   }, [screenSize, setSidebarOpen])
 
-  // Getting the microcontroller status by itself
+  // Checking if the microcontroller is online
   const [microStatus, setMicroStatus] = useState({info: false});
-  useEffect(() => {
-    getUptime();
-    checkStatus();
-  }, [devices[6]?.info])
+  // useEffect(() => {
+  //   docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
 
-  const getUptime = async () => {
-    docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+  //   uptime = docUptime.data();
+  //   console.log("uptime",uptime)
+  // }, [devices[6]?.info])
 
-    uptime = docUptime.data();
-    console.log("uptime",uptime)
-  }
+  // const getUptime = async () => {
+    
+  // }
 
-  const checkStatus = () => {
-    setTimeout(async () => {
-      newUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+  // const checkStatus = () => {
+  //   setTimeout(async () => {
+  //     newUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
 
-      updatedTime = newUptime.data();
-      if(uptime > updatedTime)
-        setMicroStatus({info: true})
-      else
-        setMicroStatus({info: false})
-      console.log("Checked Status", microStatus)
-    }, 16000)
+  //     updatedTime = newUptime.data();
+  //     if(uptime === updatedTime)
+  //       setMicroStatus({info: true})
+  //     else
+  //       setMicroStatus({info: false})
+  //     console.log("Checked Status", microStatus)
+  //   }, 16000)
 
-    console.log("new uptime",updatedTime)
-  }
+  //   console.log("new uptime",updatedTime)
+  // }
 
   // Update the status on firebase
   useEffect(() => {
@@ -137,8 +136,6 @@ function App() {
     ), []);
 
 
-  // Animations
-  const [dropdownRef] = useAutoAnimate<HTMLDivElement>();
 
   return (
     
@@ -169,7 +166,7 @@ function App() {
                 />
 
                 {/* Dropdowns */}
-                <div className="w-full relative flex justify-end" ref={dropdownRef}>
+                <div className="w-full relative flex justify-end">
                   {/* Logic for the dropdown menus */}
                   {!mobileNavOpen && 
                     clickedMenu === "notifications" ? <Notifications menuFunc={handleClickedMenu} notifs={notifications}/> :

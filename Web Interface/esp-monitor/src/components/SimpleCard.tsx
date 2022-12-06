@@ -61,12 +61,7 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=
         <p className="dark:text-slate-300 opacity-50 text-sm mb-2 capitalize">{title}</p>
         <p className="text-2xl flex gap-2 dark:text-[#e4e5f1]">
           {
-            title === "ground movements" && data > 8 ? "Severe"   :
-            title === "ground movements" && data > 5 ? "Moderate" :
-            title === "ground movements" && data < 5 ? "LOW"        :
-            title === "ground movements" && data <= 4 ? "None"       :
             data
-      
           }
           {
             title === "temperature" ? tempType :
@@ -75,7 +70,8 @@ const SimpleCard:FC<cardProps> = ({title=" ", width="w-80", height="h-28", icon=
             title === "humidity" ? "%" :
             title === "soil moisture" ? "%" :
             title === "air quality" ? "PPM" :
-            title === "water level" ? "%" :
+            title === "water level" ? "cm" :
+            title === "ground movements" ? "G" :
             " "
           }  
         </p>
