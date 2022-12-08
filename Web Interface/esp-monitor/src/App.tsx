@@ -84,35 +84,6 @@ function App() {
     
   }, [screenSize, setSidebarOpen])
 
-  // Checking if the microcontroller is online 
-  const [microStatus, setMicroStatus] = useState(false);
-  useEffect(() => {
-    if(devices[6]?.info != 0 && devices[6]?.info != undefined){
-      shouldUpdateStatus = true;
-    }
-  }, [devices[6]?.info])
-
-  useEffect(() => {
-    setTimeout(async () => {
-      if(shouldUpdateStatus){
-        setMicroStatus(true);
-      }
-      else{
-        setMicroStatus(false);
-      }
-      handleStatusUpdate();
-    }, 10000)
-  }, [])
-  
-
-  const handleStatusUpdate = async () => {
-    await updateDoc(doc(db, "DeviceStatistics/Status"), {info: microStatus});
-    shouldUpdateStatus = false;
-    if(!microStatus){
-      await updateDoc(doc(db, "DeviceStatistics/Uptime"), {info: 0});
-      setMicroStatus(false);
-    }
- }
 
   // Notifications
   const [notifications, setNotifications] = useState([{}]);
@@ -148,7 +119,6 @@ function App() {
                   customFuncTwo={() => setMobileNavOpen(!mobileNavOpen)}
                   disabledSide={sidebarDisabled}
                   mobileNav={mobileNavOpen}
-                  microStatus={microStatus}
                   notifications={notifications}
                   setClickedMenu={handleClickedMenu}
                   handleTheme={handleThemeSwitch}
