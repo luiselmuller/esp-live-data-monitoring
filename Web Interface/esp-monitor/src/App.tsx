@@ -1,4 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
+import React from 'react'
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 
@@ -24,12 +26,7 @@ import { collection, onSnapshot, doc, getDoc, updateDoc } from 'firebase/firesto
 // Animations
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
-// Variables to check device status
-let docUptime: any;
-let newUptime: any;
-let uptime: number = 0;
-let updatedTime: number = 0;
-
+let shouldUpdateStatus: boolean = false;
 function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [screenSize, setScreenSize] = useState(1920);
@@ -87,42 +84,29 @@ function App() {
     
   }, [screenSize, setSidebarOpen])
 
-  // Checking if the microcontroller is online
-  const [microStatus, setMicroStatus] = useState({info: false});
-  // useEffect(() => {
-  //   docUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
-
-  //   uptime = docUptime.data();
-  //   console.log("uptime",uptime)
-  // }, [devices[6]?.info])
-
-  // const getUptime = async () => {
-    
-  // }
-
-  // const checkStatus = () => {
-  //   setTimeout(async () => {
-  //     newUptime = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
-
-  //     updatedTime = newUptime.data();
-  //     if(uptime === updatedTime)
-  //       setMicroStatus({info: true})
-  //     else
-  //       setMicroStatus({info: false})
-  //     console.log("Checked Status", microStatus)
-  //   }, 16000)
-
-  //   console.log("new uptime",updatedTime)
-  // }
-
-  // Update the status on firebase
+  // Checking if the microcontroller is online 
+  const [microStatus, setMicroStatus] = useState(false);
   useEffect(() => {
+    shouldUpdateStatus = true;
     handleStatusUpdate();
-  }, [microStatus])
+  }, [devices[6]?.info])
+
+  useEffect(() => {
+    setTimeout(async () => {
+      if(shouldUpdateStatus){
+        setMicroStatus(true);
+      }
+      else{
+        setMicroStatus(false);
+      }
+      handleStatusUpdate();
+    }, 10000)
+  }, [])
+  
 
   const handleStatusUpdate = async () => {
-    await updateDoc(doc(db, "DeviceStatistics/Status"), microStatus);
-  }
+    await updateDoc(doc(db, "DeviceStatistics/Status"), {info: microStatus});
+ }
 
   // Notifications
   const [notifications, setNotifications] = useState([{}]);

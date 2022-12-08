@@ -15,6 +15,8 @@ import Tooltip from '@mui/material/Tooltip';
 import { Badge } from '@mui/material';
 
 
+
+
 type navProps = {
   customFuncOne?: any,
   disabledSide?: any,
@@ -38,8 +40,8 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
         </button>
         <div className={`flex gap-2 items-center sm:text-lg text-md lg:border dark:border-slate-300 border-slate-900
         rounded-full py-1 px-4 ml-5`}>
-          <div className={`${microStatus.info === true ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
-          {!disabledSide && <p>{microStatus.info === true ? "Online" : "Offline"}</p>} 
+          <div className={`${microStatus === true ? "bg-green-400" : "bg-red-400"} h-3 w-3 rounded-full `}></div>
+          {!disabledSide && <p>{microStatus === true ? "Online" : "Offline"}</p>} 
         </div>
 
         <div className="w-full"></div>
