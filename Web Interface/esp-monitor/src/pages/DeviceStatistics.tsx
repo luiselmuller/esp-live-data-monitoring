@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import { FC} from 'react'
 
 type deviceProps = {
@@ -5,7 +6,6 @@ type deviceProps = {
 }
 
 const DeviceStatistics:FC<deviceProps> = ({deviceData}) => {
-
   return (
     <div className="mt-16 md:mt-5 px-7">
       <h2 className="text-2xl opacity-80 mb-5">Microcontroller</h2>

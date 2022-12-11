@@ -21,12 +21,14 @@ import Account from './components/global/Account';
 
 // Firebase
 import db from './firebase';
-import { collection, onSnapshot, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, onSnapshot, doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 
-// Animations
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 
-let shouldUpdateStatus: boolean = false;
+let currentDate = new Date()
+let cDay = currentDate.getDate()
+let cMonth = currentDate.getMonth() + 1
+let cYear = currentDate.getFullYear()
+let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [screenSize, setScreenSize] = useState(1920);
@@ -105,10 +107,15 @@ function App() {
       
       if(prevUptime - newTime === 0){
         setMicroStatus(false)
+        await updateDoc(doc(db, "DeviceStatistics", "LastOnline"), {info: cDay + "/" + cMonth + "/" + cYear + " - " + time});
         await updateDoc(doc(db, "DeviceStatistics", "Status"), {info: false});
       }
+      else{
+        await updateDoc(doc(db, "DeviceStatistics", "LastOnline"), {info: "Currently Online"});
+      }
       console.log(prevUptime, newTime)
-    }, 6000)
+      console.log(prevUptime - newTime === 0)
+    }, 10000)
   }, [devices[6]?.info])
 
   async function getUptime() {
@@ -135,8 +142,6 @@ function App() {
         (snapshot) => 
         setNotifications(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
     ), []);
-
-
 
   return (
     

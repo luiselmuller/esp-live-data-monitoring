@@ -8,15 +8,22 @@ import db from '../../firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import React from 'react';
 
 type notifProps = {
   menuFunc?: any,
   notifs?: any
 }
 
+let currentDate = new Date()
+let cDay = currentDate.getDate()
+let cMonth = currentDate.getMonth() + 1
+let cYear = currentDate.getFullYear()
+let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
 
   const [notificationRef] = useAutoAnimate<HTMLDivElement>();
+  
 
   return (
     <ClickAwayListener onClickAway={() => {menuFunc('none')}}>
@@ -43,7 +50,7 @@ const Notifications:FC<notifProps> = ({menuFunc, notifs}) => {
                 <Suspense  fallback={<CircularProgress />}>
                   <NotificationCard 
                     message={alert.notification} 
-                    time={alert.createdAt}
+                    time={cDay + "/" + cMonth + "/" + cYear + " - " + time}
                     id={alert.id}
                   />
                 </Suspense>

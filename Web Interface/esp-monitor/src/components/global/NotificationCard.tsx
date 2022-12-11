@@ -4,6 +4,7 @@ const CancelOutlined = lazy(() => import('@mui/icons-material/CancelOutlined'))
 // Firebase
 import db from '../../firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
+import React from 'react';
 
 
 type ntcProps = {
@@ -28,7 +29,7 @@ const NotificationCard:FC<ntcProps> = ({message, time, id}) => {
             <div className="h-fit px-2 mb-2 overflow-hidden text-">
                 {message}
             </div>
-            <div className="h-fit w-full flex justify-end px-2 -translate-y-2 -translate-x-1 text-xs dark:text-gray-300">
+            <div className="h-fit w-full flex justify-end px-2 -translate-y-1 -translate-x-1 text-xs dark:text-gray-400">
                 {time}
             </div>
         </div>
