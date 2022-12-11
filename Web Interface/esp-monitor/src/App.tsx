@@ -84,6 +84,46 @@ function App() {
     
   }, [screenSize, setSidebarOpen])
 
+  // Device status
+  const [microStatus, setMicroStatus] = useState(false);
+
+  useEffect(() => {
+    setMicroStatus(devices[5]?.info)
+  },[devices[5]?.info])
+
+  // This mess should get refactored (need to do this because i have no time to do it the proper way)
+  useEffect(() => {
+    let prevUptime: number;
+    let newTime: number;
+    const getPrevUptime = async () => {
+      prevUptime = await uptime();
+    }
+    getPrevUptime();
+    
+    setTimeout(async () => {
+      newTime = await uptime();
+      
+      if(prevUptime - newTime === 0){
+        setMicroStatus(false)
+        await updateDoc(doc(db, "DeviceStatistics", "Status"), {info: false});
+      }
+      console.log(prevUptime, newTime)
+    }, 6000)
+  }, [devices[6]?.info])
+
+  async function getUptime() {
+    try {
+      let uptimeDoc = await getDoc(doc(db, "DeviceStatistics", "Uptime"));
+      return await uptimeDoc.data()?.info;
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async function uptime(){
+    let uptime: number = await getUptime();
+    return uptime;
+  }
 
   // Notifications
   const [notifications, setNotifications] = useState([{}]);
@@ -123,6 +163,7 @@ function App() {
                   setClickedMenu={handleClickedMenu}
                   handleTheme={handleThemeSwitch}
                   theme={theme}
+                  microStatus={microStatus}
                 />
 
                 {/* Dropdowns */}

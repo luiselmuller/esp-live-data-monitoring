@@ -52,7 +52,7 @@ const Navbar:FC<navProps> =({customFuncOne, customFuncTwo, disabledSide, mobileN
             <button type="button" onClick={handleTheme}
               className={`hover:scale-110 transition-all duration-200 ease-in-out outline-none active:rotate-180
               active:scale-95`}>
-              {theme === "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
+              {theme != "light" ? <LightModeIcon fontSize="large" /> : <DarkModeIcon fontSize="large" />}
             </button>
           </Tooltip>
           {mobileNav &&
