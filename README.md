@@ -18,7 +18,7 @@ For now you can [view the live site](https://microdashboard.netlify.app/).
 
 
 ## Future of the project
-For now this will continue being a personal project but, I Might do more with this project in the future and expand it after redesigning some things and considering what direction to take it in. This project had to be done in about a month so the code is quite messy and needs to be refactored.
+This project will be migrated to SvelteKit and the UI will be redesigned, when i have time i'll work on sorting out my thoughts about how to move forwards with it. The current code might be messy and not efficient as this was done in less than a month with basic knowledge of react for my class (can't recommend looking at it for reference). 
 
 
 
